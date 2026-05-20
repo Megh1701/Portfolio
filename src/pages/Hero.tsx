@@ -1,0 +1,350 @@
+import { cn } from "../lib/utils.ts"
+import EventBadge from "../components/EventBadge.tsx"
+import MusicWidget from '/image.png'
+import logo from '/logo.png'
+import { useState, useRef, useEffect } from "react"
+
+export default function HerowithScale() {
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
+  const [time, setTime] = useState(new Date())
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date())
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const playNamePronunciation = () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+      const utterance = new SpeechSynthesisUtterance('Megh Patel')
+      utterance.lang = 'en-IN'
+      utterance.rate = 0.85
+      window.speechSynthesis.speak(utterance)
+    }
+  }
+
+  useEffect(() => {
+    audioRef.current = new Audio('/sounds/khat.mp3')
+
+    audioRef.current.loop = true
+    audioRef.current.volume = 0.45
+
+    // Start from 1:49
+    audioRef.current.currentTime = 109
+
+    // Ensures currentTime works properly after metadata loads
+    audioRef.current.addEventListener('loadedmetadata', () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 109
+      }
+    })
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
+    }
+  }, [])
+
+  const handleMusicPlay = () => {
+    if (audioRef.current) {
+      audioRef.current.play()
+        .then(() => setIsMusicPlaying(true))
+        .catch(() => { /* silences auto-play blocks */ })
+    }
+  }
+
+  const handleMusicPause = () => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      setIsMusicPlaying(false)
+    }
+  }
+
+  const formattedTime = time.toLocaleTimeString('en-US', {
+    timeZone: 'Asia/Kolkata',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  })
+
+  return (
+    <section className="relative h-screen w-full overflow-hidden [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)] bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300">
+
+      {/* TOP */}
+      <HorizontalScale className="absolute top-[25%] left-0 w-full" />
+
+      {/* CENTER WRAPPER */}
+      <div className="w-full h-full flex justify-center">
+
+        {/* CONTAINER */}
+        <div className="w-full max-w-7xl h-full relative flex">
+          <div className="absolute top-0 left-0 h-full border-l border-[var(--pattern)]" >
+
+          </div>
+          <div className="w-[75%] absolute top-[calc(25%+2.5rem)] bottom-[calc(15%+2.5rem)] left-0">
+            <div className="w-full h-full flex flex-col">
+
+              {/* TOP ROW */}
+              <div className="flex w-full flex-1">
+                  {/* Left: Avatar (Top-Left Quadrant) */}
+                  <div className="w-32 md:w-44 flex items-center justify-center border-r border-[var(--pattern)] shrink-0">
+                    <div className="w-24 h-24 md:w-34 md:h-34 rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm flex items-center justify-center">
+                      <img src={logo} alt="Megh Patel" className="w-full h-full object-cover object-center" />
+                    </div>
+                  </div>
+
+                  {/* Right: Info (Top-Right Quadrant) */}
+                  <div className="flex-1 flex flex-col justify-center pl-16 md:pl-24" style={{ paddingLeft: "20px" }}>
+                    <div className="flex items-center gap-2">
+                      <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                        Megh Patel
+                      </h1>
+                      <svg className="w-5 h-5 text-blue-500 fill-current shrink-0" viewBox="0 0 24 24">
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                      </svg>
+                      <button
+                        onClick={playNamePronunciation}
+                        className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition cursor-pointer active:scale-95 flex items-center justify-center"
+                        title="Listen to pronunciation"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                          <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                        </svg>
+                      </button>
+                    </div>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-xs md:text-sm font-medium">
+                      Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
+                    </p>
+                  </div>
+                </div>
+          
+
+              {/* HORIZONTAL GRID BOUNDARY (DIVIDER) */}
+              <div className="h-px bg-[var(--pattern)] w-full" />
+
+              {/* BOTTOM ROW */}
+              <div className="flex w-full flex-1">
+
+                {/* Left: Empty (Bottom-Left Quadrant) */}
+                <div className="w-32 md:w-44 border-r border-[var(--pattern)] shrink-0" />
+
+                {/* Right: Grid Details (Bottom-Right Quadrant) */}
+                <div className="flex-1 pl-16 md:pl-24 flex items-center" >
+                  <div className="w-full h-full overflow-hidden bg-[#f5f5f0] dark:bg-[#0a0a0a]/70 backdrop-blur-[24px] shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.3)] grid grid-cols-2">
+                    {/* ROLE */}
+                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ROLE</span>
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">  Full Stack & GenAI Developer</span>
+                    </div>
+
+                    {/* LOCATION */}
+                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCATION</span>
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">Gandhinagar, Gujarat, IN</span>
+                    </div>
+
+                    {/* LOCAL TIME */}
+                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCAL TIME (IST)</span>
+                      <span className="text-emerald-600 dark:text-emerald-500 text-xs md:text-sm font-mono font-semibold mt-1">{formattedTime}</span>
+                    </div>
+
+                    {/* PRONOUNS */}
+                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">PRONOUNS</span>
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">he / him</span>
+                    </div>
+
+                    {/* EMAIL */}
+                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">EMAIL</span>
+                      <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
+                        pmegh456@gmail.com
+                      </a>
+                    </div>
+
+                    {/* STATUS */}
+                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Open to</span>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                        <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold">Freelance Full Stack or AI projects</span>
+                      </div>
+                    </div>
+
+                    {/* WEBSITE */}
+                    <div className="p-3 md:p-4 border-r border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">WEBSITE</span>
+                      <a href="https://meghpatel.dev" target="_blank" rel="noopener noreferrer" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
+                        meghpatel.dev
+                      </a>
+                    </div>
+
+                    {/* MUSIC */}
+                    <div className="p-3 md:p-4 flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">MUSIC</span>
+                      <div
+                        onClick={() => {
+                          if (isMusicPlaying) {
+                            handleMusicPause()
+                          } else {
+                            handleMusicPlay()
+                          }
+                        }}
+                        className="flex items-center gap-2 cursor-pointer group select-none active:scale-[0.98] transition-transform duration-200 mt-1"
+                      >
+                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 relative flex items-center justify-center bg-black">
+                          <img
+                            src={MusicWidget}
+                            alt="Album Art"
+                            className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")}
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                        <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none">
+                          Khat
+                        </span>
+                        </div>
+                        <div className="flex items-end gap-[1px] h-2 w-2 mb-0.5">
+                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-[2px]'}`} />
+                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-[4px]'}`} />
+                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-[3px]'}`} />
+                        </div>
+                        <span className="text-neutral-400 dark:text-neutral-500 text-[9px] font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none ml-auto">
+                          {isMusicPlaying ? 'click to stop' : 'click to play'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* BOTTOM ROW - Mobile Only */}
+              <div className="flex lg:hidden flex-col gap-4 mt-2 w-full font-mono text-left">
+                <div className="w-full divide-y divide-[var(--pattern)] bg-white/20 dark:bg-white/5 backdrop-blur-[12px]">
+                  {/* ROLE */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ROLE</span>
+                    <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold mt-1">Full Stack & GenAI Developer</span>
+                  </div>
+
+                  {/* LOCATION & LOCAL TIME */}
+                  <div className="grid grid-cols-2 divide-x divide-[var(--pattern)]">
+                    <div className="p-4 flex flex-col justify-center">
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCATION</span>
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold mt-1">Gandhinagar, GJ, IN</span>
+                    </div>
+                    <div className="p-4 flex flex-col justify-center">
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCAL TIME (IST)</span>
+                      <span className="text-emerald-600 dark:text-emerald-500 text-xs font-semibold mt-1">{formattedTime}</span>
+                    </div>
+                  </div>
+
+                  {/* PRONOUNS */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">PRONOUNS</span>
+                    <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold mt-1">he / him</span>
+                  </div>
+
+                  {/* EMAIL */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">EMAIL</span>
+                    <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
+                      pmegh456@gmail.com
+                    </a>
+                  </div>
+
+                  {/* STATUS */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Open to</span>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold">Freelance projects</span>
+                    </div>
+                  </div>
+
+                  {/* WEBSITE */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">WEBSITE</span>
+                    <a href="https://meghpatel.dev" target="_blank" rel="noopener noreferrer" className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
+                      meghpatel.dev
+                    </a>
+                  </div>
+
+                  {/* MUSIC */}
+                  <div className="p-4 flex flex-col justify-center">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">MUSIC</span>
+                    <div
+                      onClick={() => isMusicPlaying ? handleMusicPause() : handleMusicPlay()}
+                      className="flex items-center gap-2 cursor-pointer group mt-1"
+                    >
+                      <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 relative flex items-center justify-center bg-black">
+                        <img src={MusicWidget} alt="Album Art" className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")} />
+                      </div>
+                      <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none">
+                        Khat
+                      </span>
+                      <span className="text-neutral-400 dark:text-neutral-500 text-[9px] font-semibold truncate ml-auto">
+                        {isMusicPlaying ? 'click to stop' : 'click to play'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* RIGHT 35% */}
+          <div className="w-[25%] h-full absolute right-0 top-0 border-l border-[var(--pattern)]">
+            {/* RIGHT CONTENT */}
+            <EventBadge />
+          </div>
+
+          <div className="absolute top-0 right-0 h-full border-l border-[var(--pattern)]" />
+        </div>
+
+      </div>
+
+      {/* BOTTOM */}
+      <HorizontalScale className="absolute bottom-[15%] left-0 w-full" />
+    </section>
+  )
+}
+
+const HorizontalScale = ({
+  className
+}: {
+  className?: string
+}) => {
+  return (
+    <div
+      className={cn(
+        "h-10 bg-[repeating-linear-gradient(315deg,var(--pattern)_0,var(--pattern)_1px,transparent_1px,transparent_50%)] bg-[size:10px_10px] border-y border-[var(--pattern)]",
+        className
+      )}
+    />
+  )
+}
+
+export const VerticalScale = ({
+  className
+}: {
+  className?: string
+}) => {
+  return (
+    <div
+      className={cn(
+        "w-10 bg-[repeating-linear-gradient(315deg,var(--pattern)_0,var(--pattern)_1px,transparent_1px,transparent_50%)] bg-[size:10px_10px] border-x border-[var(--pattern)]",
+        className
+      )}
+    />
+  )
+}
