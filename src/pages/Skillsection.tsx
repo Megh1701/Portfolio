@@ -30,14 +30,14 @@ export const skillsData = [
   },
   {
     category: "DevOps",
-    items: ["Git", "Docker", "AWS", "Google Cloud Platform", "Vercel", "Render"],
+    items: ["Git", "Docker", "AWS", "Vercel", "Render"],
   },
   {
     category: "AI / ML",
     items: [
       "LLM API Integration",
       "RAG Pipelines",
-      "Prompt Engineering",
+      "Langchain",
       "Agentic AI",
     ],
   },
@@ -62,6 +62,12 @@ export const SKILL_ICONS: Record<string, string> = {
   "Redis": "/languageicons/redis.png",
   "Next.js": "/languageicons/next.png",
   "PostgreSQL": "/languageicons/postgres.png",
+  "Vercel": "/languageicons/vercel.png",
+  "Express.js": "/languageicons/express.png",
+  "AWS": "/languageicons/aws.png",
+  "JWT": "/languageicons/jwt.png",
+  "Render": "/languageicons/render.png",
+  "Langchain": "/languageicons/langchain.png"
 
 }
 
@@ -563,9 +569,9 @@ export default function Skillsection() {
       </div>
 
       {/* Header Container */}
-      <div className="max-w-7xl mx-auto w-full px-8 md:px-20 mb-16 flex flex-col items-center shrink-0">
-        <div className="mb-16 text-center relative z-10 shrink-0">
-          
+      <div className="max-w-7xl  mx-auto w-full px-8 md:px-20 mb-16 flex flex-col items-center shrink-0">
+        <div className="mb-16  text-center relative z-10 shrink-0" style={{ paddingBottom: "100px" }}>
+
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase">
             SKILLS
           </h2>
@@ -699,7 +705,10 @@ export default function Skillsection() {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-7xl mx-auto px-8 md:px-20 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+        <div
+          className="w-full max-w-7xl mx-auto md:px-20 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10"
+          style={{ paddingLeft: '10px' }}
+        >
           {skillsData.map((cat) => {
             const theme = CATEGORY_THEMES[cat.category] || {
               dot: "bg-emerald-500",
@@ -717,13 +726,13 @@ export default function Skillsection() {
                 </div>
 
                 {/* Skills Tag Pills */}
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {cat.items.map((skill) => {
                     const iconUrl = SKILL_ICONS[skill]
                     return (
                       <div
                         key={skill}
-                        className="flex items-center gap-1.5 px-2.5 py-1 border border-neutral-300 dark:border-neutral-800 rounded-full bg-white dark:bg-neutral-900 text-[10px] font-semibold text-neutral-800 dark:text-neutral-250 shadow-sm"
+                        className="flex items-center gap-1.5 px-2.5 py-1 border border-neutral-300 dark:border-neutral-800 rounded-full bg-white dark:bg-neutral-900 text-[10px] font-semibold text-neutral-800 dark:text-white shadow-sm"
                       >
                         {iconUrl ? (
                           <img

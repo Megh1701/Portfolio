@@ -1,14 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './pages/Hero'
 import Skills from './pages/Skillsection'
 import Contact from './pages/Contact'
 import AboutUs from './pages/AboutUs'
+import Projects from './pages/Projects'
 import Footer from './components/Footer'
+import ProjectDetails from './pages/ProjectDetails'
 
 function App() {
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null)
+
   useEffect(() => {
+    // Generate Favicon
     const size = 64
     const canvas = document.createElement('canvas')
     canvas.width = size
@@ -35,15 +40,45 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    // Hash Routing Listener
+    const handleHashChange = () => {
+      const hash = window.location.hash
+      const match = hash.match(/^#\/project\/([^\/]+)$/)
+      if (match) {
+        setActiveProjectId(match[1])
+      } else {
+        setActiveProjectId(null)
+      }
+    }
+    
+    window.addEventListener('hashchange', handleHashChange)
+    handleHashChange() // Check initial hash
+    
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  const handleBackToProjects = () => {
+    window.location.hash = '#projects' // Returns to Projects section
+    setActiveProjectId(null)
+  }
+
   return (
     <ThemeProvider>
       <div className="min-h-screen w-full bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300">
-        <Navbar />
-        <Hero />
-        <AboutUs />
-        <Skills />
-        <Contact />
-        <Footer />
+        {activeProjectId ? (
+          <ProjectDetails projectId={activeProjectId} onBack={handleBackToProjects} />
+        ) : (
+          <>
+            <Navbar />
+            <Hero />
+            <AboutUs />
+            <Projects />
+            <Skills />
+            <Contact />
+            <Footer />
+          </>
+        )}
       </div>
     </ThemeProvider>
   )

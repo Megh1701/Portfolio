@@ -44,10 +44,10 @@ export default function AboutUs() {
                             <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase font-mono tracking-widest pl-1">
                                 [01 // EDUCATION]
                             </span>
-                            <div className="w-full border border-[var(--pattern)] grid grid-cols-1 md:grid-cols-2 bg-transparent select-none font-mono">
+                            <div className="w-full border-y border-x-0 md:border border-[var(--pattern)] grid grid-cols-1 md:grid-cols-2 bg-transparent select-none font-mono">
 
                                 {/* Cell 1: DEGREE */}
-                                <div style={boxCellStyle} className="border-b border-[var(--pattern)] flex flex-col justify-center text-left gap-1">
+                                <div className="border-b border-dashed md:border-solid border-[var(--pattern)] flex flex-col justify-center text-left gap-1 p-4 md:pt-[32px] md:pb-[32px] md:pl-[44px] md:pr-[32px]">
                                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
                                         DEGREE
                                     </span>
@@ -60,7 +60,7 @@ export default function AboutUs() {
                                 </div>
 
                                 {/* Cell 2: COLLEGE */}
-                                <div style={boxCellStyle} className="border-b md:border-l border-[var(--pattern)] flex flex-col justify-center text-left gap-1">
+                                <div className="border-b border-dashed md:border-solid md:border-l border-[var(--pattern)] flex flex-col justify-center text-left gap-1 p-4 md:pt-[32px] md:pb-[32px] md:pl-[44px] md:pr-[32px]">
                                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
                                         COLLEGE
                                     </span>
@@ -73,7 +73,7 @@ export default function AboutUs() {
                                 </div>
 
                                 {/* Cell 3: DURATION */}
-                                <div style={boxCellStyle} className="border-b md:border-b-0 border-[var(--pattern)] flex flex-col justify-center text-left gap-1">
+                                <div className="border-b border-dashed md:border-solid md:border-b-0 border-[var(--pattern)] flex flex-col justify-center text-left gap-1 p-4 md:pt-[32px] md:pb-[32px] md:pl-[44px] md:pr-[32px]">
                                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-50">
                                         DURATION
                                     </span>
@@ -86,7 +86,7 @@ export default function AboutUs() {
                                 </div>
 
                                 {/* Cell 4: LOCATION */}
-                                <div style={boxCellStyle} className="md:border-l border-[var(--pattern)] flex flex-col justify-center text-left gap-1">
+                                <div className="md:border-l border-[var(--pattern)] flex flex-col justify-center text-left gap-1 p-4 md:pt-[32px] md:pb-[32px] md:pl-[44px] md:pr-[32px]">
                                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
                                         LOCATION
                                     </span>
@@ -188,7 +188,7 @@ export default function AboutUs() {
                             <div style={milestoneStyle} className="border-b border-dashed border-[var(--pattern)] flex flex-col justify-center text-left gap-1">
                                 <div className="flex items-baseline justify-between w-full gap-4">
                                     <span className="text-neutral-955 dark:text-neutral-50 text-sm font-semibold">
-                                        SSIP Project
+                                        SSIP 2025
                                     </span>
                                     <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] text-neutral-400 dark:text-neutral-500 shrink-0">
                                         <span className="font-bold">2025</span>

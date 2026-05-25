@@ -406,7 +406,7 @@ function Key({ label, isPressed }: { label: string; isPressed: boolean }) {
   return (
     <button
       type="button"
-      className="flex items-end bg-transparent p-0"
+      className="flex items-end bg-transparent p-0 focus:outline-none focus-visible:outline-none outline-none select-none"
       onMouseDown={() => {
         triggerKeyFeedback(label);
         setPressed(true);

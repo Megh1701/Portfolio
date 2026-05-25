@@ -83,10 +83,10 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto w-full px-8 md:px-20 relative z-10">
         {/* Footer 3-Grid Layout */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 border-t border-b md:border md:rounded-xl border-[var(--pattern)] divide-y md:divide-y-0 md:divide-x divide-[var(--pattern)] bg-transparent font-mono select-none">
+        <div className="w-full flex md:grid md:grid-cols-3 border-t border-b md:border  border-[var(--pattern)] divide-x divide-[var(--pattern)] bg-transparent font-mono select-none overflow-x-auto snap-x snap-mandatory no-scrollbar">
 
           {/* Cell 1: Acknowledgement */}
-          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px]">
+          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px] w-[80vw] sm:w-[50vw] md:w-auto shrink-0 snap-center">
             <div className="flex flex-col gap-1">
               <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
                 [ ACKNOWLEDGEMENT ]
@@ -101,7 +101,7 @@ export default function Footer() {
           </div>
 
           {/* Cell 2: Visitor Analytics (Plain simple ordinal greeting) */}
-          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px]">
+          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px] w-[80vw] sm:w-[50vw] md:w-auto shrink-0 snap-center">
             <div className="flex flex-col gap-1">
               <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
                 [ VISITOR INDEX ]
@@ -117,7 +117,7 @@ export default function Footer() {
           </div>
 
           {/* Cell 3: Vibe Check (Interactive Like Button) */}
-          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px] relative">
+          <div className="p-6 md:p-12 flex flex-col justify-between gap-6 min-h-[180px] md:min-h-[220px] w-[80vw] sm:w-[50vw] md:w-auto shrink-0 snap-center relative">
             <div className="flex flex-col gap-1">
               <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">
                 [ VIBE CHECK ]
@@ -163,8 +163,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Socials & Nav Row */}
-        <div className="w-full mt-8 border-t border-[var(--pattern)] pt-8 flex flex-col md:flex-row justify-between items-center gap-6 font-mono">
-          <div className="flex flex-wrap gap-6 text-xs text-neutral-450 dark:text-neutral-500 uppercase tracking-widest select-none justify-center md:justify-start">
+        <div className="w-full mt-8 border-t border-[var(--pattern)] pt-8 flex flex-row flex-wrap justify-between items-center gap-y-4 gap-x-6 font-mono">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-neutral-450 dark:text-neutral-500 uppercase tracking-widest select-none justify-start">
             <span>[ CONNECT ]</span>
             <a
               href="https://github.com/Megh1701"
@@ -190,7 +190,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="text-[10px] text-neutral-450 dark:text-neutral-500 uppercase tracking-widest text-center md:text-right select-none">
+          <div className="text-[10px] text-neutral-450 dark:text-neutral-500 uppercase tracking-widest text-left select-none">
             © {new Date().getFullYear()} MEGH PATEL // ALL RIGHTS RESERVED
           </div>
         </div>
@@ -210,6 +210,13 @@ export default function Footer() {
         }
         .animate-float-fade-up {
           animation: floatFadeUp 800ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </footer>

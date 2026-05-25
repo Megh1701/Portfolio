@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Keys from "../components/Keys"
 
 export default function Contact() {
@@ -7,22 +7,58 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : false)
+
+  useEffect(() => {
+    const checkWidth = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    }
+    checkWidth()
+    window.addEventListener("resize", checkWidth)
+    return () => window.removeEventListener("resize", checkWidth)
+  }, [])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !message) return
 
     setIsSubmitting(true)
-    setTimeout(() => {
-      setEmail("")
-      setMessage("")
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE",
+          email: email,
+          message: message,
+          from_name: "Portfolio Contact Form",
+          subject: "New Slate Message from Portfolio",
+        }),
+      })
+
+      const data = await response.json()
+      if (data.success) {
+        setEmail("")
+        setMessage("")
+        setShowSuccess(true)
+        setTimeout(() => setShowSuccess(false), 4000)
+      } else {
+        console.error("Web3Forms error:", data)
+        alert(data.message || "Failed to post message on slate. Please try again.")
+      }
+    } catch (err) {
+      console.error("Failed to submit contact form:", err)
+      alert("Something went wrong while sending the message. Please check your internet connection and try again.")
+    } finally {
       setIsSubmitting(false)
-      setShowSuccess(true)
-      setTimeout(() => setShowSuccess(false), 4000)
-    }, 800)
+    }
   }
 
   return (
-    <section id="contact" className="relative w-full min-h-screen bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 border-t border-[var(--pattern)] flex justify-center py-20 [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)]">
+    <section id="contact" className="relative w-full min-h-[85vh] md:min-h-screen bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 border-t border-[var(--pattern)] flex justify-center items-center py-14 md:py-20 [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)]">
 
       {/* Centered full-height vertical borders wrapper */}
       <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl pointer-events-none z-10">
@@ -34,15 +70,15 @@ export default function Contact() {
       </div>
 
       {/* Container with vertical lines on both sides matching the Hero section */}
-      <div className="w-full max-w-7xl relative flex flex-col items-center px-6 md:px-16 m-10 gap-16"
+      <div className="w-full max-w-7xl relative flex flex-col items-center px-6 md:px-16 my-6 md:my-10 gap-10 md:gap-16"
         style={{
-          marginTop: "100px",
+          marginTop: isDesktop ? "100px" : "0px",
         }}>
 
 
         {/* Section Header */}
         <div className="text-center relative z-10 shrink-0">
-          
+
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase">
             CONTACT
           </h2>
@@ -161,18 +197,20 @@ export default function Contact() {
           </form>
 
           {/* Keyboard container (positioned immediately below with tight gap - Desktop Only) */}
-          <div
-            className="hidden lg:flex w-full overflow-x-auto justify-center relative z-10"
-            style={{
-              flexShrink: 0,
-              marginTop: "10px",
-              paddingBottom: "64px"
-            }}
-          >
-            <div className="min-w-[820px] px-4">
-              <Keys />
+          {isDesktop && (
+            <div
+              className="hidden lg:flex w-full overflow-x-auto justify-center relative z-10"
+              style={{
+                flexShrink: 0,
+                marginTop: "10px",
+                paddingBottom: "64px"
+              }}
+            >
+              <div className="min-w-[820px] px-4">
+                <Keys />
+              </div>
             </div>
-          </div>
+          )}
 
         </div>
 
