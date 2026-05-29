@@ -405,7 +405,7 @@ export default function Projects() {
               // Centre stack horizontally under active card.
               animX = spread * (isMobile ? 24 : 38)
               // Push them into the lower half of the active card so their tops are hidden
-              animY = isMobile ? 200 : 255
+              animY = isMobile ? 220 : 260
               animRotate = [-5, 3, -3, 4][stackIdx] ?? 0 // select the custom angle for this card's position in the stack
               animZIndex = 51           // always < active card z:50, so active covers their tops
               animaScale = isMobile ? 0.55 : 0.68

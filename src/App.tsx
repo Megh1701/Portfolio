@@ -221,7 +221,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      <div className="min-h-screen w-full bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300">
+      <div className="min-h-screen w-[calc(100%-4px)] mx-[2px] md:w-full md:mx-0 bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300">
         <Navbar />
         <div style={{ paddingTop: `${navbarHeight}px` }}>
           {activeProjectId ? (
