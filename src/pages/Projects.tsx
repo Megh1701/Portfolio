@@ -25,8 +25,8 @@ export const Cards: CardItem[] = [
     index: "1",
     title: "Omera",
     subtitle: "Fintech & Remittance Platform",
-    stack: ["React.js", "Node.js", "REST API", "Tailwind CSS"],
-    description: "Constructed high-frequency transaction screens, currency conversion charts, and secure remittance checkouts.",
+    stack: ["Next.js", "Typescript", "Tailwind CSS"],
+    description: "Designed and developed the OM Money Zone website to make insurance, loans, and investment services simple, modern, and easy for users to explore online.",
     className: "bg-orange-400 text-stone-900 border-black",
     config: {
       x: -320,
@@ -60,7 +60,7 @@ export const Cards: CardItem[] = [
     index: "2",
     title: "Devswipe",
     subtitle: "Developer Swipe & Networking",
-    stack: ["React Native", "Node.js", "Express.js", "MongoDB"],
+    stack: ["MERN stack", "Tailwind", "Socket.IO", "JWT", "Docker"],
     description: "A tinder-like matching application connecting developers based on skill sets, interest levels, and stack profiles.",
     className: "bg-[#f0ece1] text-stone-900 border-black",
     config: {
@@ -87,11 +87,12 @@ export const Cards: CardItem[] = [
   },
   {
     index: "3",
-    title: "Verdict",
-    subtitle: "SSIP Student Research Portal",
-    stack: ["React.js", "Express.js", "PostgreSQL", "Docker"],
-    description: "A portal under the SSIP 2025 initiative enabling student innovators to submit and review startup proposals.",
+    title: "Verdict AI",
+    subtitle: "Legal Intelligence Platform",
+    stack: ["Python", "FAISS", "RAG", "LangChain", "Redis"],
+    description: "Multilingual legal research platform for Indian court judgment discovery using RAG, hybrid semantic search, and FAISS vector indexing across 100K+ chunks.",
     className: "bg-[#0a8dc8] text-stone-900 border-black",
+
     config: {
       x: 0,
       y: -30,
@@ -123,11 +124,12 @@ export const Cards: CardItem[] = [
     )
   },
   {
+
     index: "4",
     title: "Eternal",
-    subtitle: "Export Business Showcase",
-    stack: ["Next.js", "TypeScript", "MongoDB", "Vercel"],
-    description: "Premium product catalog, multi-language trade inquiry cart, and search engine optimization structure.",
+    subtitle: "First Freelance Client",
+    stack: ["React.js", "Tailwind CSS", "MongoDB", "Vercel"],
+    description: "Full business website for a ceramic and sanitary ware exporter — product catalog, inquiry forms, and a clean B2B storefront.",
     className: "bg-[#48d28c] text-stone-900 border-black",
     config: {
       x: 160,
@@ -155,11 +157,12 @@ export const Cards: CardItem[] = [
     )
   },
   {
+
     index: "5",
-    title: "Portfolio",
-    subtitle: "Interactive Scrapbook Design",
-    stack: ["Ai", "Motion", "Matter.js", "Tailwind CSS"],
-    description: "My personal interactive portfolio website featuring Framer Motion card fans, mouse-tracking glare gradients",
+    title: "Connect Four",
+    subtitle: "Where It All Began",
+    stack: ["HTML", "CSS", "JavaScript"],
+    description: "My very first project — a classic Connect Four game built from scratch in first year with vanilla HTML, CSS, and JS.",
     className: "bg-[#1c1b1a] text-stone-100 border-black",
     config: {
       x: 320,
@@ -193,54 +196,48 @@ interface SwipeButtonProps {
 
 function SwipeButton({ onSwipeSuccess, isDarkCard = false }: SwipeButtonProps) {
   const x = useMotionValue(0)
-  
-  // Fade out the "Swipe to explore" text as the handle moves to the right
+
   const textOpacity = useTransform(x, [0, 120], [0.8, 0])
-  
+
   // Slide fill behind the handle: starts at 34px (2px padding + 32px handle width)
   const fillWidth = useTransform(x, (val) => `${val + 34}px`)
 
   const handleDragEnd = () => {
-    // Max drag is 192 (224 inside width - 32 handle), so 150 is a perfect swipe threshold
+
     if (x.get() > 150) {
-      // Animate handle smoothly to the end of the track to "lock in" the swipe
       animate(x, 192, {
         type: "spring",
         stiffness: 400,
         damping: 30
       }).then(() => {
         onSwipeSuccess()
-        // Reset to 0 behind the scenes so it is ready if user returns
         setTimeout(() => x.set(0), 300)
       })
     } else {
-      // Smooth snap back to start
       animate(x, 0, { type: "spring", stiffness: 250, damping: 25 })
     }
   }
 
   return (
-    <div 
-      className={`w-full h-9 border rounded-2xl relative p-0.5 overflow-hidden flex items-center select-none cursor-pointer ${
-        isDarkCard 
-          ? "bg-white/10 border-white/15" 
-          : "bg-black/10 border-black/15"
-      }`}
-    >
-      <motion.div 
-        className={`absolute left-0 top-0 bottom-0 rounded-2xl ${
-          isDarkCard ? "bg-white/20" : "bg-stone-900/20"
+    <div
+      className={`w-full h-9 border rounded-2xl relative p-0.5 overflow-hidden flex items-center select-none cursor-pointer ${isDarkCard
+        ? "bg-white/10 border-white/15"
+        : "bg-black/10 border-black/15"
         }`}
+    >
+      <motion.div
+        className={`absolute left-0 top-0 bottom-0 rounded-2xl ${isDarkCard ? "bg-white/20" : "bg-stone-900/20"
+          }`}
         style={{ width: fillWidth }}
       />
-      
-      <motion.span 
+
+      <motion.span
         className="absolute inset-0 flex items-center justify-center text-[9px] font-mono font-bold uppercase tracking-widest pointer-events-none select-none text-current opacity-75"
         style={{ opacity: textOpacity }}
       >
         » Swipe to explore
       </motion.span>
-      
+
       <motion.div
         drag="x"
         dragConstraints={{ left: 0, right: 192 }}
@@ -264,20 +261,31 @@ export default function Projects() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [mousePos, setMousePos] = useState({ x: 114, y: 144, rotateX: 0, rotateY: 0, active: false })
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+
+    if (window.innerWidth < 768) {
       setSelectedIndex(0) // Default to first card (Omera) on mobile
     }
+
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   // Cards sorted by x for relative positioning math
   const sortedByX = [...Cards].map((c, i) => ({ card: c, arrIdx: i })).sort((a, b) => a.card.config.x - b.card.config.x)
 
-  const handleCardClick = (indexStr: string, arrIdx: number) => {
+  const handleCardClick = (arrIdx: number) => {
     if (selectedIndex === arrIdx) {
-      // Already selected — navigate to project
-      window.location.hash = `#/project/${indexStr}`
+      // Already selected — collapse/deselect if on desktop, do nothing on mobile
+      if (!isMobile) {
+        setSelectedIndex(null)
+      }
     } else {
       // Select this card
       setSelectedIndex(arrIdx)
@@ -381,10 +389,10 @@ export default function Projects() {
             } else if (isSelected) {
               // Active card — centered, pushed upward slightly
               animX = 0
-              animY = -120
+              animY = isMobile ? -50 : -70
               animRotate = 0
               animZIndex = 50
-              animaScale = 1.53
+              animaScale = isMobile ? 1.25 : 1.53
             } else {
               // Non-active: stack BEHIND active card, tops hidden under it, bottoms peeking out
               const nonActiveInOrder = sortedByX.filter(e => e.arrIdx !== selectedIndex)
@@ -395,12 +403,12 @@ export default function Projects() {
               const spread = stackIdx - (totalStack - 1) / 2
 
               // Centre stack horizontally under active card.
-              animX = spread * 38
+              animX = spread * (isMobile ? 24 : 38)
               // Push them into the lower half of the active card so their tops are hidden
-              animY = 220
+              animY = isMobile ? 200 : 255
               animRotate = [-5, 3, -3, 4][stackIdx] ?? 0 // select the custom angle for this card's position in the stack
               animZIndex = 51           // always < active card z:50, so active covers their tops
-              animaScale = 0.68
+              animaScale = isMobile ? 0.55 : 0.68
             }
 
             // Card dimensions per state (constant base size, scaled dynamically via GPU)
@@ -439,15 +447,15 @@ export default function Projects() {
                 }}
               >
                 <motion.button
-                  onClick={(e) => { e.stopPropagation(); handleCardClick(card.index, index) }}
+                  onClick={(e) => { e.stopPropagation(); handleCardClick(index) }}
                   onMouseMove={(e) => handleMouseMove(e, index)}
                   onMouseLeave={handleMouseLeave}
                   className={`relative flex flex-col justify-around items-start rounded-2xl border shadow-lg text-left select-none overflow-hidden cursor-pointer ${card.className}`}
-                  style={{ 
-                    width: cardW, 
-                    height: cardH, 
-                    padding: "15px", 
-                    transformStyle: "preserve-3d" 
+                  style={{
+                    width: cardW,
+                    height: cardH,
+                    padding: "15px",
+                    transformStyle: "preserve-3d"
                   }}
                 >
                   {/* Top: Card skeleton graphic */}
@@ -490,9 +498,9 @@ export default function Projects() {
                   {/* CTA swipe button on active card (fixed curvy button matching card margins) */}
                   {isSelected && (
                     <div className="absolute bottom-0 left-0 right-0 w-full select-none z-20" onClick={(e) => e.stopPropagation()}>
-                      <SwipeButton 
+                      <SwipeButton
                         isDarkCard={card.className.includes("text-stone-100")}
-                        onSwipeSuccess={() => window.location.hash = `#/project/${card.index}`} 
+                        onSwipeSuccess={() => window.location.hash = `#/project/${card.index}`}
                       />
                     </div>
                   )}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useTheme } from "../context/ThemeContext"
 
 function Navbar() {
-  const { theme, toggleTheme } = useTheme()
+  const { resolvedTheme, toggleTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 768 : false)
@@ -15,6 +15,11 @@ function Navbar() {
       const projectsEl = document.getElementById("projects")
       const skillsEl = document.getElementById("skills")
       const contactEl = document.getElementById("contact")
+
+      if (window.location.hash.includes("/project/")) {
+        setActiveSection("projects")
+        return
+      }
 
       if (contactEl && scrollPos >= contactEl.offsetTop) {
         setActiveSection("contact")
@@ -33,6 +38,7 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll)
     window.addEventListener("resize", checkWidth)
+    window.addEventListener("hashchange", handleScroll)
     
     // Run initial check
     handleScroll()
@@ -41,40 +47,52 @@ function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", checkWidth)
+      window.removeEventListener("hashchange", handleScroll)
     }
   }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
+    const section = document.getElementById("home")
+    if (section && !window.location.hash.includes("/project/")) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    } else {
+      window.location.hash = "#/"
+    }
   }
 
   const scrollToProjects = () => {
     const section = document.getElementById("projects")
-    if (section) {
+    if (section && !window.location.hash.includes("/project/")) {
       section.scrollIntoView({
         behavior: "smooth"
       })
+    } else {
+      window.location.hash = "#projects"
     }
   }
 
   const scrollToSkills = () => {
     const section = document.getElementById("skills")
-    if (section) {
+    if (section && !window.location.hash.includes("/project/")) {
       section.scrollIntoView({
         behavior: "smooth"
       })
+    } else {
+      window.location.hash = "#skills"
     }
   }
 
   const scrollToContact = () => {
     const section = document.getElementById("contact")
-    if (section) {
+    if (section && !window.location.hash.includes("/project/")) {
       section.scrollIntoView({
         behavior: "smooth"
       })
+    } else {
+      window.location.hash = "#contact"
     }
   }
 
@@ -170,7 +188,7 @@ function Navbar() {
                 {/* ODOMETER BOX */}
                 <div className="relative h-5 text-[10px] overflow-hidden border border-neutral-300 dark:border-neutral-700 rounded-sm ml-2 px-2 min-w-[52px] bg-white dark:bg-neutral-900">
                   <div
-                    className={`transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${theme === "dark" ? "-translate-y-5" : "translate-y-0"
+                    className={`transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${resolvedTheme === "dark" ? "-translate-y-5" : "translate-y-0"
                       }`}
                   >
                     <div className="h-5 flex items-center justify-center text-black dark:text-white font-bold select-none">

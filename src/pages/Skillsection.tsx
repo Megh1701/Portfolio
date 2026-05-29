@@ -206,8 +206,7 @@ export default function Skillsection() {
   // Track viewport width responsiveness
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : false)
 
-  // Track active category for mobile tabbed view
-  const [activeCategory, setActiveCategory] = useState(skillsData[0].category)
+
 
   // Array of refs to update DOM elements directly in 60fps loop
   const elementsRef = useRef<(HTMLDivElement | null)[]>([])

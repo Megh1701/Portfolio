@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react"
 import Keys from "../components/Keys"
+import arrow from "/arrow.png"
+import { useTheme } from "../context/ThemeContext"
 
 export default function Contact() {
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -199,15 +203,39 @@ export default function Contact() {
           {/* Keyboard container (positioned immediately below with tight gap - Desktop Only) */}
           {isDesktop && (
             <div
-              className="hidden lg:flex w-full overflow-x-auto justify-center relative z-10"
+              className="w-full flex justify-center z-10 relative"
               style={{
                 flexShrink: 0,
                 marginTop: "10px",
-                paddingBottom: "64px"
+                paddingBottom: "80px"
               }}
             >
               <div className="min-w-[820px] px-4">
                 <Keys />
+              </div>
+
+              <div className="absolute bottom-4 right-[10%] xl:right-[15%] flex items-center gap-2.5 select-none group pointer-events-none">
+               
+                <img
+                  src={arrow}
+                  alt="arrow"
+                  style={{ 
+                    filter: isDark 
+                      ? 'invert(58%) sepia(84%) saturate(415%) hue-rotate(113deg) brightness(96%) contrast(94%)' 
+                      : 'invert(31%) sepia(87%) saturate(541%) hue-rotate(120deg) brightness(90%) contrast(98%)'
+                  }}
+                  className="w-16 h-16 object-contain transform rotate-[-65deg] transition-all duration-300"
+                />
+                 <a
+                  href="https://github.com/Megh1701/keyboard-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[17px] font-bold tracking-wide text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-all duration-300 pointer-events-auto relative"
+                  style={{ fontFamily: '"Patrick Hand", cursive' }}
+                >
+                  I made this(keyboard code)
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[1.5px] bg-emerald-700 dark:bg-emerald-400 transition-all duration-300 w-full" />
+                </a>
               </div>
             </div>
           )}

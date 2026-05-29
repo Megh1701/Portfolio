@@ -74,31 +74,31 @@ export function ThemeProvider({
   // =========================
 
   // =========================
-// APPLY THEME
-// =========================
+  // APPLY THEME
+  // =========================
 
-useEffect(() => {
-  const root = document.documentElement
+  useEffect(() => {
+    const root = document.documentElement
 
-  const systemTheme = getSystemTheme()
+    const systemTheme = getSystemTheme()
 
-  const activeTheme =
-    theme === 'system'
-      ? systemTheme
-      : theme
+    const activeTheme =
+      theme === 'system'
+        ? systemTheme
+        : theme
 
-  setResolvedTheme(activeTheme)
+    setResolvedTheme(activeTheme)
 
-  root.classList.remove(
-    'light',
-    'dark'
-  )
+    root.classList.remove(
+      'light',
+      'dark'
+    )
 
-  root.classList.add(activeTheme)
+    root.classList.add(activeTheme)
 
-  root.style.colorScheme =
-    activeTheme
-}, [theme])
+    root.style.colorScheme =
+      activeTheme
+  }, [theme])
 
   // =========================
   // SYSTEM THEME LISTENER
@@ -161,37 +161,37 @@ useEffect(() => {
   // TOGGLE
   // =========================
 
-const toggleTheme = async (e?: any) => {
-  const nextTheme =
-    resolvedTheme === 'dark'
-      ? 'light'
-      : 'dark'
+  const toggleTheme = async (e?: any) => {
+    const nextTheme =
+      resolvedTheme === 'dark'
+        ? 'light'
+        : 'dark'
 
-  // Update dynamic CSS coordinates for circular reveal
-  if (e && e.currentTarget) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = rect.left + rect.width / 2
-    const y = rect.top + rect.height / 2
-    document.documentElement.style.setProperty('--x', `${x}px`)
-    document.documentElement.style.setProperty('--y', `${y}px`)
-  } else {
-    // Fallback to top right area
-    document.documentElement.style.setProperty('--x', '92%')
-    document.documentElement.style.setProperty('--y', '32px')
-  }
+    // Update dynamic CSS coordinates for circular reveal
+    if (e && e.currentTarget) {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const x = rect.left + rect.width / 2
+      const y = rect.top + rect.height / 2
+      document.documentElement.style.setProperty('--x', `${x}px`)
+      document.documentElement.style.setProperty('--y', `${y}px`)
+    } else {
+      // Fallback to top right area
+      document.documentElement.style.setProperty('--x', '92%')
+      document.documentElement.style.setProperty('--y', '32px')
+    }
 
-  // Modern smooth transition
-  if (
-    'startViewTransition' in document
-  ) {
-    // @ts-ignore
-    document.startViewTransition(() => {
+    // Modern smooth transition
+    if (
+      'startViewTransition' in document
+    ) {
+      // @ts-ignore
+      document.startViewTransition(() => {
+        setTheme(nextTheme)
+      })
+    } else {
       setTheme(nextTheme)
-    })
-  } else {
-    setTheme(nextTheme)
+    }
   }
-}
 
   const value = useMemo(
     () => ({

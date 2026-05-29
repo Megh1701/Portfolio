@@ -108,7 +108,7 @@ export default function EventBadge() {
           className="w-20 h-20 rotate-[-65deg] object-contain"
         />
         <span className="text-sm font-semibold tracking-wide text-emerald-400">
-         You can Drag me!!
+          You can Drag me!!
         </span>
       </div>
 
@@ -271,15 +271,15 @@ function Band({
         )
       )
 
-      ;[
-        card,
-        j1,
-        j2,
-        j3,
-        fixed
-      ].forEach((ref) =>
-        ref.current?.wakeUp()
-      )
+        ;[
+          card,
+          j1,
+          j2,
+          j3,
+          fixed
+        ].forEach((ref) =>
+          ref.current?.wakeUp()
+        )
 
       card.current?.setNextKinematicTranslation(
         {
@@ -292,38 +292,38 @@ function Band({
 
     if (!fixed.current) return
 
-    // =========================
-    // SMOOTH ROPE
-    // =========================
+      // =========================
+      // SMOOTH ROPE
+      // =========================
 
-    ;[j1, j2].forEach((ref) => {
-      if (!(ref.current as any).lerped) {
-        ;(ref.current as any).lerped =
-          new THREE.Vector3().copy(
-            ref.current.translation()
-          )
-      }
+      ;[j1, j2].forEach((ref) => {
+        if (!(ref.current as any).lerped) {
+          ; (ref.current as any).lerped =
+            new THREE.Vector3().copy(
+              ref.current.translation()
+            )
+        }
 
-      const clampedDistance = Math.max(
-        0.1,
-        Math.min(
-          1,
-          (
-            ref.current as any
-          ).lerped.distanceTo(
-            ref.current.translation()
+        const clampedDistance = Math.max(
+          0.1,
+          Math.min(
+            1,
+            (
+              ref.current as any
+            ).lerped.distanceTo(
+              ref.current.translation()
+            )
           )
         )
-      )
 
-      ;(ref.current as any).lerped.lerp(
-        ref.current.translation(),
-        delta *
-          (minSpeed +
-            clampedDistance *
+          ; (ref.current as any).lerped.lerp(
+            ref.current.translation(),
+            delta *
+            (minSpeed +
+              clampedDistance *
               (maxSpeed - minSpeed))
-      )
-    })
+          )
+      })
 
     // =========================
     // ROPE END
@@ -354,9 +354,9 @@ function Band({
       fixed.current.translation()
     )
 
-    ;(
-      band.current.geometry as any
-    ).setPoints(curve.getPoints(32))
+      ; (
+        band.current.geometry as any
+      ).setPoints(curve.getPoints(32))
 
     // =========================
     // STABILIZATION FIX
@@ -370,7 +370,7 @@ function Band({
       x: ang.x,
       y: ang.y - rot.y * 0.25,
       z: ang.z
-    },true)
+    }, true)
   })
 
   return (
@@ -436,7 +436,7 @@ function Band({
               hover(false)
             }
             onPointerUp={(e) => {
-              ;(
+              ; (
                 e.target as Element
               ).releasePointerCapture(
                 e.pointerId
@@ -445,7 +445,7 @@ function Band({
               drag(false)
             }}
             onPointerDown={(e) => {
-              ;(
+              ; (
                 e.target as Element
               ).setPointerCapture(
                 e.pointerId
@@ -513,25 +513,25 @@ function Band({
             </mesh>
           </group>
         </RigidBody>
-        
+
       </group>
 
 
       {/* ROPE */}
 
-     {/* ROPE */}
+      {/* ROPE */}
 
-<mesh ref={band}>
-  <meshLineGeometry />
+      <mesh ref={band}>
+        <meshLineGeometry />
 
-  <meshLineMaterial
-    color={resolvedTheme === 'dark' ? 'white' : 'black'}
-    resolution={[width, height]}
-    lineWidth={0.2}
-    transparent
-    depthWrite={false}
-  />
-</mesh>
+        <meshLineMaterial
+          color={resolvedTheme === 'dark' ? 'white' : 'black'}
+          resolution={[width, height]}
+          lineWidth={0.2}
+          transparent
+          depthWrite={false}
+        />
+      </mesh>
     </>
   )
 }

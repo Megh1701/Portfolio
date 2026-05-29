@@ -74,7 +74,7 @@ export default function HerowithScale() {
   })
 
   return (
-    <section className="relative w-full overflow-hidden [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)] bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 min-h-screen md:h-screen">
+    <section id="home" className="relative w-full overflow-hidden [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)] bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 min-h-screen md:h-screen">
 
       {/* TOP - Hidden on mobile */}
       <HorizontalScale className="hidden md:block absolute top-[25%] left-0 w-full" />
@@ -181,11 +181,8 @@ export default function HerowithScale() {
 
                   {/* WEBSITE & MUSIC — 2 col */}
                   <div className="grid grid-cols-2">
-                    <div className="p-6 border-r border-[var(--pattern)]">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">WEBSITE</span>
-                      <a href="https://meghpatel.dev" target="_blank" rel="noopener noreferrer" className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate block">
-                        meghpatel.dev
-                      </a>
+                    <div className="border-r border-[var(--pattern)] relative h-[72px] overflow-visible">
+                      <FolderSlider />
                     </div>
                     <div className="p-6">
                       <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">MUSIC</span>
@@ -258,7 +255,7 @@ export default function HerowithScale() {
 
                 {/* Right: Grid Details (Bottom-Right Quadrant) */}
                 <div className="flex-1 pl-16 md:pl-24 flex items-center" >
-                  <div className="w-full h-full overflow-hidden bg-[#f5f5f0] dark:bg-[#0a0a0a]/70 backdrop-blur-[24px] shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.3)] grid grid-cols-2">
+                  <div className="w-full h-full overflow-visible bg-[#f5f5f0] dark:bg-[#0a0a0a]/70 backdrop-blur-[24px] shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.3)] grid grid-cols-2">
                     {/* ROLE */}
                     <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
                       <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ROLE</span>
@@ -300,12 +297,9 @@ export default function HerowithScale() {
                       </div>
                     </div>
 
-                    {/* WEBSITE */}
-                    <div className="p-3 md:p-4 border-r border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">WEBSITE</span>
-                      <a href="https://meghpatel.dev" target="_blank" rel="noopener noreferrer" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
-                        meghpatel.dev
-                      </a>
+                    {/* RÉSUMÉ */}
+                    <div className="border-r border-[var(--pattern)] relative overflow-visible min-h-[64px]">
+                      <FolderSlider />
                     </div>
 
                     {/* MUSIC */}
@@ -364,6 +358,94 @@ export default function HerowithScale() {
       {/* BOTTOM - Hidden on mobile */}
       <HorizontalScale className="hidden md:block absolute bottom-[15%] left-0 w-full" />
     </section>
+  )
+}
+
+const FolderSlider = ({ className }: { className?: string }) => {
+  return (
+    <a
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn("absolute inset-0 flex flex-col justify-end overflow-hidden group/folder cursor-pointer select-none bg-[#f5f5f0] dark:bg-[#0a0a0a]/70", className)}
+    >
+      {/* Document Sheet (slides up on hover) */}
+      <div 
+        className="absolute left-[12px] right-[12px] bottom-1 h-[65%] bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-50 dark:to-neutral-100 text-black p-2 shadow-[0_4px_12px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.6)] border border-neutral-200/80 rounded-[2px] z-10 transition-all duration-400 ease-out transform translate-y-[60%] opacity-0 group-hover/folder:translate-y-[-35%] group-hover/folder:rotate-[-1.5deg] group-hover/folder:opacity-100"
+      >
+        {/* Document lines simulation */}
+        <div className="flex flex-col gap-1 w-full h-full relative">
+          {/* Header */}
+          <div className="border-b border-neutral-200 pb-0.5 mb-1 flex items-center justify-between">
+            <div>
+              <div className="text-[7.5px] font-sans font-bold leading-none tracking-tight uppercase text-neutral-850">MEGH PATEL</div>
+              <div className="text-[5.5px] font-mono text-neutral-400 scale-90 origin-left mt-0.5">fullstack.tsx</div>
+            </div>
+            {/* Tiny check status */}
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-50 border border-emerald-500/30 flex items-center justify-center text-[4px] text-emerald-600 font-bold">✓</div>
+          </div>
+
+          {/* Body Lines (Simulated TSX code block) */}
+          <div className="flex flex-col gap-[3px] font-mono text-[5px] leading-none">
+            {/* class Developer { */}
+            <div className="flex items-center gap-[2px]">
+              <span className="w-4 h-[2px] bg-purple-500/60 dark:bg-purple-600/50 rounded-sm shrink-0" />
+              <span className="w-7 h-[2px] bg-blue-500/60 dark:bg-blue-600/50 rounded-sm shrink-0" />
+              <span className="w-1 h-[2px] bg-neutral-300 rounded-sm shrink-0" />
+            </div>
+            {/*   name = "Megh"; */}
+            <div className="flex items-center gap-[2px] pl-1.5">
+              <span className="w-3.5 h-[2px] bg-neutral-400/60 rounded-sm shrink-0" />
+              <span className="w-1 h-[2px] bg-red-400/60 rounded-sm shrink-0" />
+              <span className="w-7 h-[2px] bg-amber-500/50 rounded-sm shrink-0" />
+            </div>
+            {/*   skills = [React, AI]; */}
+            <div className="flex items-center gap-[2px] pl-1.5">
+              <span className="w-4 h-[2px] bg-neutral-400/60 rounded-sm shrink-0" />
+              <span className="w-1.5 h-[2px] bg-red-400/60 rounded-sm shrink-0" />
+              <span className="w-1 h-[2px] bg-neutral-300 rounded-sm shrink-0" />
+              <span className="w-4.5 h-[2px] bg-blue-400/60 rounded-sm shrink-0" />
+              <span className="w-2.5 h-[2px] bg-emerald-400/60 rounded-sm shrink-0" />
+              <span className="w-1 h-[2px] bg-neutral-300 rounded-sm shrink-0" />
+            </div>
+            {/* } */}
+            <div>
+              <span className="w-1 h-[2px] bg-neutral-300 rounded-sm shrink-0" />
+            </div>
+          </div>
+
+          {/* Vintage red ink stamp */}
+          <div className="absolute right-1 bottom-1 w-4 h-4 rounded-full border border-red-500/35 flex items-center justify-center text-[4px] text-red-500/65 font-mono font-black uppercase tracking-tighter transform rotate-12 scale-90 select-none">
+            pass
+          </div>
+        </div>
+      </div>
+
+      {/* Pocket Front Flap */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-[#eaeae2] to-[#f0f0ea] dark:from-[#141414] dark:to-[#1a1a1a] border-t border-[var(--pattern)] z-20 flex items-center justify-between px-3 md:px-4 shadow-[0_-2px_6px_rgba(0,0,0,0.03)]"
+      >
+        {/* Label */}
+        <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 select-none">
+          RÉSUMÉ
+        </span>
+
+        {/* Catalog Drawer Pull Handle (vintage metallic bar) */}
+        <div className="absolute top-[35%] left-1/2 -translate-x-1/2 w-7 h-[2px] rounded-full bg-gradient-to-b from-neutral-300 to-neutral-400 dark:from-neutral-700 dark:to-neutral-800 border border-neutral-400/20 dark:border-neutral-600/20 shadow-[0_0.5px_1px_rgba(0,0,0,0.15)] opacity-80 group-hover/folder:scale-x-110 transition-all duration-300 z-30" />
+
+        {/* Vintage red ink stamp */}
+        <div className="text-[7px] font-mono text-[#b03535] dark:text-[#db4d4d] border border-dashed border-[#b03535]/40 dark:border-[#db4d4d]/40 px-1 rounded-sm uppercase tracking-widest font-black transform rotate-[-4deg] opacity-75 select-none scale-90">
+          OPEN
+        </div>
+      </div>
+
+      {/* The Tab */}
+      <div className="absolute bottom-[40%] left-[12px] h-[12px] px-2 bg-[#eaeae2] dark:bg-[#141414] border-t border-x border-[var(--pattern)] rounded-t-[3px] flex items-center justify-center z-20 transition-all duration-400 ease-out origin-bottom shadow-sm group-hover/folder:translate-y-[-3px] group-hover/folder:scale-y-[1.05]">
+        <span className="text-[6.5px] font-mono font-bold tracking-wider text-neutral-500 dark:text-neutral-400 uppercase">
+          RESUME.PDF
+        </span>
+      </div>
+    </a>
   )
 }
 

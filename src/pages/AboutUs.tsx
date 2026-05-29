@@ -1,12 +1,6 @@
 import { ArrowUpRight } from "lucide-react"
 
 export default function AboutUs() {
-    const boxCellStyle = {
-        paddingTop: "32px",
-        paddingBottom: "32px",
-        paddingLeft: "44px",
-        paddingRight: "32px",
-    }
 
     const milestoneStyle = {
         paddingTop: "20px",
