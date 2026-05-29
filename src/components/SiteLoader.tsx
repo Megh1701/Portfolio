@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { motion } from "motion/react"
 
 export default function SiteLoader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0)
