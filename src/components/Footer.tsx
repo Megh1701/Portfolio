@@ -2,32 +2,33 @@ import { useState, useEffect } from "react"
 import { Heart } from "lucide-react"
 
 export default function Footer() {
-  const [visitors, setVisitors] = useState(1482)
-  const [likes, setLikes] = useState(87)
+  const [visitors, setVisitors] = useState(0)
+  const [likes, setLikes] = useState(0)
   const [hasLiked, setHasLiked] = useState(false)
   const [plusOnes, setPlusOnes] = useState<{ id: number; x: number; y: number }[]>([])
 
   useEffect(() => {
     // 1. Handle Visitor Counter
-    const storedVisitors = localStorage.getItem("megh_portfolio_visitors")
+    const storedVisitors = localStorage.getItem("megh_portfolio_visitors_v2")
     if (storedVisitors) {
       const newVal = parseInt(storedVisitors, 10) + 1
       setVisitors(newVal)
-      localStorage.setItem("megh_portfolio_visitors", newVal.toString())
+      localStorage.setItem("megh_portfolio_visitors_v2", newVal.toString())
     } else {
-      localStorage.setItem("megh_portfolio_visitors", "1482")
+      setVisitors(1)
+      localStorage.setItem("megh_portfolio_visitors_v2", "1")
     }
 
     // 2. Handle Likes Counter
-    const storedLikes = localStorage.getItem("megh_portfolio_likes")
+    const storedLikes = localStorage.getItem("megh_portfolio_likes_v2")
     if (storedLikes) {
       setLikes(parseInt(storedLikes, 10))
     } else {
-      localStorage.setItem("megh_portfolio_likes", "87")
+      localStorage.setItem("megh_portfolio_likes_v2", "0")
     }
 
     // 3. Check if user already liked
-    const userLiked = localStorage.getItem("megh_portfolio_has_liked")
+    const userLiked = localStorage.getItem("megh_portfolio_has_liked_v2")
     if (userLiked === "true") {
       setHasLiked(true)
     }
@@ -36,7 +37,7 @@ export default function Footer() {
   const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newLikesCount = likes + 1
     setLikes(newLikesCount)
-    localStorage.setItem("megh_portfolio_likes", newLikesCount.toString())
+    localStorage.setItem("megh_portfolio_likes_v2", newLikesCount.toString())
 
     // Animate a floating +1
     const rect = e.currentTarget.getBoundingClientRect()
@@ -53,7 +54,7 @@ export default function Footer() {
 
     if (!hasLiked) {
       setHasLiked(true)
-      localStorage.setItem("megh_portfolio_has_liked", "true")
+      localStorage.setItem("megh_portfolio_has_liked_v2", "true")
     }
   }
 
