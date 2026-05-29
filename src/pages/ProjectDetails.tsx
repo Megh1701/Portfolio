@@ -408,7 +408,7 @@ function CustomVideoPlayer({ src, poster, style }: { src?: string; poster?: stri
         />
       ) : (
         <div className="w-full h-full bg-neutral-900 flex items-center justify-center">
-          {poster && <img src={poster} alt="" className="w-full h-full object-cover opacity-60 filter grayscale" />}
+          {poster && <img src={poster} alt="Project case study video preview poster" className="w-full h-full object-cover opacity-60 filter grayscale" />}
         </div>
       )}
 
@@ -671,8 +671,8 @@ export default function ProjectDetails({ projectId, onBack }: ProjectDetailsProp
         <section style={{ padding: "20px" }} className="pt-12 border-t border-neutral-200 dark:border-neutral-800 flex flex-col items-center justify-center gap-8 my-16 w-full">
           <div className="flex flex-col items-center text-center gap-2">
             <img
-              src="/logo.png"
-              alt="Megh Patel Logo"
+              src="/logo_optimized.jpg"
+              alt="Megh Patel profile photo"
               className="w-12 h-12 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white object-cover"
             />
             <div>

@@ -29,7 +29,7 @@ export const skillsData = [
     items: ["MongoDB", "MySQL", "PostgreSQL", "Redis"],
   },
   {
-    category: "DevOps",
+    category: "DevOps/Deployment",
     items: ["Git", "Docker", "AWS", "Vercel", "Render"],
   },
   {
@@ -113,7 +113,7 @@ const CATEGORY_THEMES: Record<string, { border: string; bg: string; dot: string;
     text: "text-amber-600 dark:text-amber-400",
     shadow: "shadow-[0_0_12px_rgba(245,158,11,0.15)]"
   },
-  "DevOps": {
+  "DevOps/Deployment": {
     border: "border-rose-300/40 dark:border-rose-500/20",
     bg: "bg-rose-500/5 dark:bg-rose-500/10",
     dot: "bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]",
@@ -168,7 +168,7 @@ const getLayoutConfig = (width: number, height: number) => {
         case "Frontend": col = 1; row = 0; break
         case "Backend": col = 2; row = 0; break
         case "Databases": col = 0; row = 1; break
-        case "DevOps": col = 1; row = 1; break
+        case "DevOps/Deployment": col = 1; row = 1; break
         case "AI / ML": col = 2; row = 1; break
       }
 
@@ -736,7 +736,7 @@ export default function Skillsection() {
                         {iconUrl ? (
                           <img
                             src={iconUrl}
-                            alt=""
+                            alt={`${skill} icon`}
                             className="w-3.5 h-3.5 object-contain shrink-0"
                           />
                         ) : (

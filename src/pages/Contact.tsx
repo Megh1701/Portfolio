@@ -218,7 +218,7 @@ export default function Contact() {
                
                 <img
                   src={arrow}
-                  alt="arrow"
+                  alt="Hand-drawn green arrow indicating link to custom keyboard code"
                   style={{ 
                     filter: isDark 
                       ? 'invert(58%) sepia(84%) saturate(415%) hue-rotate(113deg) brightness(96%) contrast(94%)' 

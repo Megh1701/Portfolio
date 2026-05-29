@@ -1,10 +1,21 @@
 import { cn } from "../lib/utils.ts"
 import EventBadge from "../components/EventBadge.tsx"
 import MusicWidget from '/image.png'
-import logo from '/logo.png'
+import logo from '/logo_optimized.jpg'
 import { useState, useRef, useEffect } from "react"
 
 export default function HerowithScale() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
   const [time, setTime] = useState(new Date())
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -89,258 +100,258 @@ export default function HerowithScale() {
           </div>
           <div className="w-full md:w-[75%] relative md:absolute md:top-[calc(25%+2.5rem)] md:bottom-[calc(15%+2.5rem)] md:left-0 px-5 md:py-0 md:px-0">
             <div className="w-full flex flex-col md:h-full">
+              {isMobile ? (
+                /* ═══════════════════════════════════════════════ */
+                /* MOBILE LAYOUT - only rendered on mobile screens */
+                /* ═══════════════════════════════════════════════ */
+                <div className="flex flex-col w-full" style={{ paddingTop: '250px', paddingBottom: '40px' }}>
 
-              {/* ═══════════════════════════════════════════════ */}
-              {/* MOBILE LAYOUT - only visible below md breakpoint */}
-              {/* ═══════════════════════════════════════════════ */}
-              <div className="md:hidden flex flex-col w-full" style={{ paddingTop: '250px', paddingBottom: '40px' }}>
+                  {/* ── Profile Card ── */}
+                  <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]">
+                    <div className="flex border-b border-[var(--pattern)]">
+                      {/* Avatar cell — even padding on all sides */}
+                      <div className="flex items-center justify-center p-6 shrink-0 border-r border-[var(--pattern)]">
+                        <div className="w-[80px] h-[80px] rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm">
+                          <img src={logo} alt="Megh Patel profile photo" className="w-full h-full object-cover object-center" />
+                        </div>
+                      </div>
 
-                {/* ── Profile Card ── */}
-                <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]">
-                  <div className="flex border-b border-[var(--pattern)]">
-                    {/* Avatar cell — even padding on all sides */}
-                    <div className="flex items-center justify-center p-6 shrink-0 border-r border-[var(--pattern)]">
-                      <div className="w-[80px] h-[80px] rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm">
-                        <img src={logo} alt="Megh Patel" className="w-full h-full object-cover object-center" />
+                      {/* Name & subtitle cell */}
+                      <div className="flex flex-col justify-center p-6 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate" style={{ marginLeft: '20px' }}>
+                            Megh Patel
+                          </h1>
+                          <svg className="w-4 h-4 text-blue-500 fill-current shrink-0" viewBox="0 0 24 24">
+                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                          </svg>
+                          <button
+                            onClick={playNamePronunciation}
+                            className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition cursor-pointer active:scale-95 flex items-center justify-center shrink-0"
+                            title="Listen to pronunciation"
+                          >
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                              <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Name & subtitle cell */}
-                    <div className="flex flex-col justify-center p-6 min-w-0">
+                    {/* Bio with elegant spacing */}
+                    <div className="p-6">
+                      <p className="text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed font-medium">
+                        Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* ── Info Grid ── */}
+                  <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]" style={{ marginTop: '50px' }}>
+                    {/* ROLE */}
+                    <div className="p-6 border-b border-[var(--pattern)]">
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">ROLE</span>
+                      <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Full Stack &amp; GenAI Developer</p>
+                    </div>
+
+                    {/* LOCATION & LOCAL TIME — 2 col */}
+                    <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
+                      <div className="p-6 border-r border-[var(--pattern)]">
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCATION</span>
+                        <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Gandhinagar, GJ, IN</p>
+                      </div>
+                      <div className="p-6">
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCAL TIME (IST)</span>
+                        <p className="text-emerald-600 dark:text-emerald-500 text-sm font-semibold font-mono mt-1">{formattedTime}</p>
+                      </div>
+                    </div>
+
+                    {/* PRONOUNS & EMAIL — 2 col */}
+                    <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
+                      <div className="p-6 border-r border-[var(--pattern)]">
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">PRONOUNS</span>
+                        <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">he / him</p>
+                      </div>
+                      <div className="p-6">
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">EMAIL</span>
+                        <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate block">
+                          pmegh456@gmail.com
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* STATUS */}
+                    <div className="p-6 border-b border-[var(--pattern)]">
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">Open to</span>
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                        <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold">Freelance projects</span>
+                      </div>
+                    </div>
+
+                    {/* WEBSITE & MUSIC — 2 col */}
+                    <div className="grid grid-cols-2">
+                      <div className="border-r border-[var(--pattern)] relative h-[72px] overflow-visible">
+                        <FolderSlider />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">MUSIC</span>
+                        <div
+                          onClick={() => isMusicPlaying ? handleMusicPause() : handleMusicPlay()}
+                          className="flex items-center gap-2 cursor-pointer group active:scale-95 transition-transform duration-200 mt-1"
+                        >
+                          <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 bg-black">
+                            <img src={MusicWidget} alt="Khat song album art mobile" className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")} />
+                          </div>
+                          <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold truncate group-hover:text-emerald-500 transition-colors">
+                            Khat
+                          </span>
+                          <div className="flex items-end gap-[1px] h-2 w-2 ml-auto">
+                            <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-[2px]'}`} />
+                            <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-[4px]'}`} />
+                            <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-[3px]'}`} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              ) : (
+                <>
+                  {/* DESKTOP HEADER - only rendered on desktop screens */}
+                  <div className="flex md:flex-1">
+                    {/* Left: Avatar (Top-Left Quadrant) */}
+                    <div className="w-32 md:w-44 flex items-center justify-center border-r border-[var(--pattern)] shrink-0">
+                      <div className="w-24 h-24 md:w-34 md:h-34 rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm flex items-center justify-center">
+                        <img src={logo} alt="Megh Patel profile photo" className="w-full h-full object-cover object-center" />
+                      </div>
+                    </div>
+
+                    {/* Right: Info (Top-Right Quadrant) */}
+                    <div className="flex-1 flex flex-col justify-center pl-16 md:pl-24" style={{ paddingLeft: "20px" }}>
                       <div className="flex items-center gap-2">
-                        <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate" style={{ marginLeft: '20px' }}>
+                        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                           Megh Patel
                         </h1>
-                        <svg className="w-4 h-4 text-blue-500 fill-current shrink-0" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-blue-500 fill-current shrink-0" viewBox="0 0 24 24">
                           <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                         <button
                           onClick={playNamePronunciation}
-                          className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition cursor-pointer active:scale-95 flex items-center justify-center shrink-0"
+                          className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition cursor-pointer active:scale-95 flex items-center justify-center"
                           title="Listen to pronunciation"
                         >
-                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                             <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
                           </svg>
                         </button>
                       </div>
+                      <p className="text-neutral-500 dark:text-neutral-400 text-xs md:text-sm font-medium">
+                        Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
+                      </p>
                     </div>
                   </div>
 
-                  {/* Bio with elegant spacing */}
-                  <div className="p-6">
-                    <p className="text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed font-medium">
-                      Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
-                    </p>
-                  </div>
-                </div>
+                  {/* HORIZONTAL GRID BOUNDARY (DIVIDER) - Desktop only */}
+                  <div className="h-px bg-[var(--pattern)] w-full" />
 
-                {/* ── Info Grid ── */}
-                <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]" style={{ marginTop: '50px' }}>
-                  {/* ROLE */}
-                  <div className="p-6 border-b border-[var(--pattern)]">
-                    <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">ROLE</span>
-                    <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Full Stack &amp; GenAI Developer</p>
-                  </div>
+                  {/* DESKTOP BOTTOM ROW */}
+                  <div className="flex md:flex-1 md:w-full">
+                    {/* Left: Empty (Bottom-Left Quadrant) */}
+                    <div className="w-32 md:w-44 border-r border-[var(--pattern)] shrink-0" />
 
-                  {/* LOCATION & LOCAL TIME — 2 col */}
-                  <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
-                    <div className="p-6 border-r border-[var(--pattern)]">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCATION</span>
-                      <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Gandhinagar, GJ, IN</p>
-                    </div>
-                    <div className="p-6">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCAL TIME (IST)</span>
-                      <p className="text-emerald-600 dark:text-emerald-500 text-sm font-semibold font-mono mt-1">{formattedTime}</p>
-                    </div>
-                  </div>
-
-                  {/* PRONOUNS & EMAIL — 2 col */}
-                  <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
-                    <div className="p-6 border-r border-[var(--pattern)]">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">PRONOUNS</span>
-                      <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">he / him</p>
-                    </div>
-                    <div className="p-6">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">EMAIL</span>
-                      <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate block">
-                        pmegh456@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* STATUS */}
-                  <div className="p-6 border-b border-[var(--pattern)]">
-                    <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">Open to</span>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                      <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold">Freelance projects</span>
-                    </div>
-                  </div>
-
-                  {/* WEBSITE & MUSIC — 2 col */}
-                  <div className="grid grid-cols-2">
-                    <div className="border-r border-[var(--pattern)] relative h-[72px] overflow-visible">
-                      <FolderSlider />
-                    </div>
-                    <div className="p-6">
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">MUSIC</span>
-                      <div
-                        onClick={() => isMusicPlaying ? handleMusicPause() : handleMusicPlay()}
-                        className="flex items-center gap-2 cursor-pointer group active:scale-95 transition-transform duration-200 mt-1"
-                      >
-                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 bg-black">
-                          <img src={MusicWidget} alt="Album Art" className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")} />
+                    {/* Right: Grid Details (Bottom-Right Quadrant) */}
+                    <div className="flex-1 pl-16 md:pl-24 flex items-center" >
+                      <div className="w-full h-full overflow-visible bg-[#f5f5f0] dark:bg-[#0a0a0a]/70 backdrop-blur-[24px] shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.3)] grid grid-cols-2">
+                        {/* ROLE */}
+                        <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ROLE</span>
+                          <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">  Full Stack & GenAI Developer</span>
                         </div>
-                        <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold truncate group-hover:text-emerald-500 transition-colors">
-                          Khat
-                        </span>
-                        <div className="flex items-end gap-[1px] h-2 w-2 ml-auto">
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-[2px]'}`} />
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-[4px]'}`} />
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-[3px]'}`} />
+
+                        {/* LOCATION */}
+                        <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCATION</span>
+                          <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">Gandhinagar, Gujarat, IN</span>
+                        </div>
+
+                        {/* LOCAL TIME */}
+                        <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCAL TIME (IST)</span>
+                          <span className="text-emerald-600 dark:text-emerald-500 text-xs md:text-sm font-mono font-semibold mt-1">{formattedTime}</span>
+                        </div>
+
+                        {/* PRONOUNS */}
+                        <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">PRONOUNS</span>
+                          <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">he / him</span>
+                        </div>
+
+                        {/* EMAIL */}
+                        <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">EMAIL</span>
+                          <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
+                            pmegh456@gmail.com
+                          </a>
+                        </div>
+
+                        {/* STATUS */}
+                        <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Open to</span>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                            <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold">Freelance Full Stack or AI projects</span>
+                          </div>
+                        </div>
+
+                        {/* RÉSUMÉ */}
+                        <div className="border-r border-[var(--pattern)] relative overflow-visible min-h-[64px]">
+                          <FolderSlider />
+                        </div>
+
+                        {/* MUSIC */}
+                        <div className="p-3 md:p-4 flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
+                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">MUSIC</span>
+                          <div
+                            onClick={() => {
+                              if (isMusicPlaying) {
+                                handleMusicPause()
+                              } else {
+                                handleMusicPlay()
+                              }
+                            }}
+                            className="flex items-center gap-2 cursor-pointer group select-none active:scale-[0.98] transition-transform duration-200 mt-1"
+                          >
+                            <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 relative flex items-center justify-center bg-black">
+                              <img
+                                src={MusicWidget}
+                                alt="Khat song album art desktop"
+                                className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")}
+                              />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none">
+                                Khat
+                              </span>
+                            </div>
+                            <div className="flex items-end gap-[1px] h-2 w-2 mb-0.5">
+                              <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-[2px]'}`} />
+                              <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-[4px]'}`} />
+                              <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-[3px]'}`} />
+                            </div>
+                            <span className="text-neutral-400 dark:text-neutral-500 text-[9px] font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none ml-auto">
+                              {isMusicPlaying ? 'click to stop' : 'click to play'}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-              </div>
-
-              {/* DESKTOP HEADER - hide on mobile */}
-              <div className="hidden md:flex md:flex-1">
-                {/* Left: Avatar (Top-Left Quadrant) */}
-                <div className="w-32 md:w-44 flex items-center justify-center border-r border-[var(--pattern)] shrink-0">
-                  <div className="w-24 h-24 md:w-34 md:h-34 rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm flex items-center justify-center">
-                    <img src={logo} alt="Megh Patel" className="w-full h-full object-cover object-center" />
-                  </div>
-                </div>
-
-                {/* Right: Info (Top-Right Quadrant) */}
-                <div className="flex-1 flex flex-col justify-center pl-16 md:pl-24" style={{ paddingLeft: "20px" }}>
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                      Megh Patel
-                    </h1>
-                    <svg className="w-5 h-5 text-blue-500 fill-current shrink-0" viewBox="0 0 24 24">
-                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                    </svg>
-                    <button
-                      onClick={playNamePronunciation}
-                      className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition cursor-pointer active:scale-95 flex items-center justify-center"
-                      title="Listen to pronunciation"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <p className="text-neutral-500 dark:text-neutral-400 text-xs md:text-sm font-medium">
-                    Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
-                  </p>
-                </div>
-              </div>
-
-
-              {/* HORIZONTAL GRID BOUNDARY (DIVIDER) - Desktop only */}
-              <div className="hidden md:block h-px bg-[var(--pattern)] w-full" />
-
-              {/* DESKTOP BOTTOM ROW */}
-              <div className="hidden md:flex md:flex-1 md:w-full">
-
-                {/* Left: Empty (Bottom-Left Quadrant) */}
-                <div className="w-32 md:w-44 border-r border-[var(--pattern)] shrink-0" />
-
-                {/* Right: Grid Details (Bottom-Right Quadrant) */}
-                <div className="flex-1 pl-16 md:pl-24 flex items-center" >
-                  <div className="w-full h-full overflow-visible bg-[#f5f5f0] dark:bg-[#0a0a0a]/70 backdrop-blur-[24px] shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_0_0_var(--glass-glow),0_12px_40px_-12px_rgba(0,0,0,0.3)] grid grid-cols-2">
-                    {/* ROLE */}
-                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ROLE</span>
-                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">  Full Stack & GenAI Developer</span>
-                    </div>
-
-                    {/* LOCATION */}
-                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCATION</span>
-                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">Gandhinagar, Gujarat, IN</span>
-                    </div>
-
-                    {/* LOCAL TIME */}
-                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">LOCAL TIME (IST)</span>
-                      <span className="text-emerald-600 dark:text-emerald-500 text-xs md:text-sm font-mono font-semibold mt-1">{formattedTime}</span>
-                    </div>
-
-                    {/* PRONOUNS */}
-                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">PRONOUNS</span>
-                      <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1">he / him</span>
-                    </div>
-
-                    {/* EMAIL */}
-                    <div className="p-3 md:p-4 border-r border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">EMAIL</span>
-                      <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate">
-                        pmegh456@gmail.com
-                      </a>
-                    </div>
-
-                    {/* STATUS */}
-                    <div className="p-3 md:p-4 border-b border-[var(--pattern)] flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Open to</span>
-                      <div className="flex items-center gap-1.5 mt-1">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-                        <span className="text-neutral-900 dark:text-neutral-100 text-xs md:text-sm font-semibold">Freelance Full Stack or AI projects</span>
-                      </div>
-                    </div>
-
-                    {/* RÉSUMÉ */}
-                    <div className="border-r border-[var(--pattern)] relative overflow-visible min-h-[64px]">
-                      <FolderSlider />
-                    </div>
-
-                    {/* MUSIC */}
-                    <div className="p-3 md:p-4 flex flex-col justify-center" style={{ paddingLeft: "10px" }}>
-                      <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">MUSIC</span>
-                      <div
-                        onClick={() => {
-                          if (isMusicPlaying) {
-                            handleMusicPause()
-                          } else {
-                            handleMusicPlay()
-                          }
-                        }}
-                        className="flex items-center gap-2 cursor-pointer group select-none active:scale-[0.98] transition-transform duration-200 mt-1"
-                      >
-                        <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 relative flex items-center justify-center bg-black">
-                          <img
-                            src={MusicWidget}
-                            alt="Album Art"
-                            className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")}
-                          />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                          <span className="text-neutral-900 dark:text-neutral-100 text-xs font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none">
-                            Khat
-                          </span>
-                        </div>
-                        <div className="flex items-end gap-[1px] h-2 w-2 mb-0.5">
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-[2px]'}`} />
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-[4px]'}`} />
-                          <span className={`w-[1px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-[3px]'}`} />
-                        </div>
-                        <span className="text-neutral-400 dark:text-neutral-500 text-[9px] font-semibold truncate group-hover:text-emerald-500 transition-colors leading-none ml-auto">
-                          {isMusicPlaying ? 'click to stop' : 'click to play'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                </>
+              )}
             </div>
           </div>
 

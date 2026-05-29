@@ -6,6 +6,9 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 768 : false)
+  const isProjectActive = () => {
+    return window.location.hash.includes("/project/") || window.location.pathname.includes("/project/")
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,7 +19,7 @@ function Navbar() {
       const skillsEl = document.getElementById("skills")
       const contactEl = document.getElementById("contact")
 
-      if (window.location.hash.includes("/project/")) {
+      if (isProjectActive()) {
         setActiveSection("projects")
         return
       }
@@ -39,6 +42,7 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll)
     window.addEventListener("resize", checkWidth)
     window.addEventListener("hashchange", handleScroll)
+    window.addEventListener("popstate", handleScroll)
     
     // Run initial check
     handleScroll()
@@ -48,54 +52,58 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", checkWidth)
       window.removeEventListener("hashchange", handleScroll)
+      window.removeEventListener("popstate", handleScroll)
     }
   }, [])
 
   const scrollToTop = () => {
     const section = document.getElementById("home")
-    if (section && !window.location.hash.includes("/project/")) {
+    if (section && !isProjectActive()) {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       })
     } else {
-      window.location.hash = "#/"
+      window.history.pushState(null, "", "/#/")
+      window.dispatchEvent(new Event("popstate"))
     }
   }
 
   const scrollToProjects = () => {
     const section = document.getElementById("projects")
-    if (section && !window.location.hash.includes("/project/")) {
+    if (section && !isProjectActive()) {
       section.scrollIntoView({
         behavior: "smooth"
       })
     } else {
-      window.location.hash = "#projects"
+      window.history.pushState(null, "", "/#projects")
+      window.dispatchEvent(new Event("popstate"))
     }
   }
 
   const scrollToSkills = () => {
     const section = document.getElementById("skills")
-    if (section && !window.location.hash.includes("/project/")) {
+    if (section && !isProjectActive()) {
       section.scrollIntoView({
         behavior: "smooth"
       })
     } else {
-      window.location.hash = "#skills"
+      window.history.pushState(null, "", "/#skills")
+      window.dispatchEvent(new Event("popstate"))
     }
   }
 
   const scrollToContact = () => {
     const section = document.getElementById("contact")
-    if (section && !window.location.hash.includes("/project/")) {
+    if (section && !isProjectActive()) {
       section.scrollIntoView({
         behavior: "smooth"
       })
     } else {
-      window.location.hash = "#contact"
+      window.history.pushState(null, "", "/#contact")
+      window.dispatchEvent(new Event("popstate"))
     }
   }
-
   return (
     <>
       {/* Mobile recommendation banner - Scrolls out of view naturally */}
