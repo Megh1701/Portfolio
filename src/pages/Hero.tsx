@@ -104,7 +104,7 @@ export default function HerowithScale() {
                 /* ═══════════════════════════════════════════════ */
                 /* MOBILE LAYOUT - only rendered on mobile screens */
                 /* ═══════════════════════════════════════════════ */
-                <div className="flex flex-col w-full" style={{ paddingTop: '125px', paddingBottom: '40px' }}>
+                <div className="flex flex-col w-full" style={{ paddingTop: '100px', paddingBottom: '40px' }}>
 
                   {/* ── Profile Card ── */}
                   <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]">
