@@ -159,7 +159,7 @@ export default function AboutUs() {
                     </div>
 
                     {/* COLUMN 2: EXPERIENCE (PLAIN LIST, NO BOX) - ORDER: NEW -> OLD */}
-                    <div className="flex flex-col gap-3 w-full" style={{ paddingLeft: isMobile ? "18px" : "0px", paddingRight: isMobile ? "18px" : "0px" }}>
+                    <div className="flex flex-col gap-3 w-full" style={{ paddingLeft: isMobile ? "18px" : "0px", paddingRight: isMobile ? "18px" : "0px", paddingBottom: isMobile ? "100px" : "0px"  }}>
                         <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase font-mono tracking-widest pl-1">
                             [02 // MILESTONES]
                         </span>
