@@ -149,11 +149,11 @@ function Home() {
                                 onClick={() => window.open('https://open.spotify.com/search/Khat%20Navjot%20Ahuja', '_blank')}
                                 className="flex items-center gap-4 group cursor-pointer active:scale-95 transition-transform duration-200 select-none"
                             >
-                                {/* Rotating Album Art Disc (Spins continuously at all times!) */}
+                                {/* Rotating Album Art Disc */}
                                 <img
                                     src={MusicWidget}
                                     alt="Album Art"
-                                    className="w-14 h-14 rounded-full object-cover shadow-md border border-neutral-200/50 shrink-0 select-none animate-[spin_8s_linear_infinite]"
+                                    className={`w-14 h-14 rounded-full object-cover shadow-md border border-neutral-200/50 shrink-0 select-none ${isMusicPlaying ? 'animate-[spin_8s_linear_infinite]' : ''}`}
                                 />
 
                                 {/* Music Details */}
