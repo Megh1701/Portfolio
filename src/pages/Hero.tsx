@@ -104,13 +104,13 @@ export default function HerowithScale() {
                 /* ═══════════════════════════════════════════════ */
                 /* MOBILE LAYOUT - only rendered on mobile screens */
                 /* ═══════════════════════════════════════════════ */
-                <div className="flex flex-col w-full" style={{ paddingTop: '100px', paddingBottom: '40px' }}>
+                <div className="flex flex-col w-full" style={{ paddingTop: '75px', paddingBottom: '40px' }}>
 
                   {/* ── Profile Card ── */}
                   <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]">
                     <div className="flex border-b border-[var(--pattern)]">
                       {/* Avatar cell — even padding on all sides */}
-                      <div className="flex items-center justify-center p-6 shrink-0 border-r border-[var(--pattern)]">
+                      <div style={{ padding: "10px 15px" }} className="flex items-center justify-center p-6 shrink-0 border-r border-[var(--pattern)]">
                         <div className="w-[80px] h-[80px] rounded-full overflow-hidden border border-[var(--pattern)] shadow-sm">
                           <img src={logo} alt="Megh Patel profile photo" className="w-full h-full object-cover object-center" />
                         </div>
@@ -140,7 +140,7 @@ export default function HerowithScale() {
                     </div>
 
                     {/* Bio with elegant spacing */}
-                    <div className="p-6">
+                    <div className="p-6" style={{ padding: "10px 15px" }}>
                       <p className="text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed font-medium">
                         Full stack developer building scalable web products with MERN, Generative AI, cloud infrastructure, and modern databases. Freelance experience delivering 2 real-world production applications.
                       </p>
@@ -150,18 +150,18 @@ export default function HerowithScale() {
                   {/* ── Info Grid ── */}
                   <div className="border border-[var(--pattern)] bg-white/40 dark:bg-white/[0.03]" style={{ marginTop: '50px' }}>
                     {/* ROLE */}
-                    <div className="p-6 border-b border-[var(--pattern)]">
+                    <div className="border-b border-[var(--pattern)]" style={{ padding: "10px 15px" }}>
                       <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">ROLE</span>
                       <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Full Stack &amp; GenAI Developer</p>
                     </div>
 
                     {/* LOCATION & LOCAL TIME — 2 col */}
                     <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
-                      <div className="p-6 border-r border-[var(--pattern)]">
+                      <div className="border-r border-[var(--pattern)]" style={{ padding: "10px 15px" }}>
                         <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCATION</span>
                         <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">Gandhinagar, GJ, IN</p>
                       </div>
-                      <div className="p-6">
+                      <div style={{ padding: "10px 15px" }}>
                         <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">LOCAL TIME (IST)</span>
                         <p className="text-emerald-600 dark:text-emerald-500 text-sm font-semibold font-mono mt-1">{formattedTime}</p>
                       </div>
@@ -169,11 +169,11 @@ export default function HerowithScale() {
 
                     {/* PRONOUNS & EMAIL — 2 col */}
                     <div className="grid grid-cols-2 border-b border-[var(--pattern)]">
-                      <div className="p-6 border-r border-[var(--pattern)]">
+                      <div className="border-r border-[var(--pattern)]" style={{ padding: "10px 15px" }}>
                         <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">PRONOUNS</span>
                         <p className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1">he / him</p>
                       </div>
-                      <div className="p-6">
+                      <div style={{ padding: "10px 15px" }}>
                         <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">EMAIL</span>
                         <a href="mailto:pmegh456@gmail.com" className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold mt-1 hover:text-blue-500 transition-colors truncate block">
                           pmegh456@gmail.com
@@ -182,7 +182,7 @@ export default function HerowithScale() {
                     </div>
 
                     {/* STATUS */}
-                    <div className="p-6 border-b border-[var(--pattern)]">
+                    <div className="border-b border-[var(--pattern)]" style={{ padding: "10px 15px" }}>
                       <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">Open to</span>
                       <div className="flex items-center gap-1.5 mt-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
@@ -192,11 +192,28 @@ export default function HerowithScale() {
 
                     {/* WEBSITE & MUSIC — 2 col */}
                     <div className="grid grid-cols-2">
-                      <div className="border-r border-[var(--pattern)] relative h-[72px] overflow-visible">
-                        <FolderSlider />
+                      <div className="border-r border-[var(--pattern)] flex flex-col justify-center" style={{ padding: "10px 15px" }}>
+                        <a
+                          href="/resume.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col justify-center text-left gap-1 select-none font-mono group"
+                        >
+                          <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">RÉSUMÉ</span>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold group-hover:text-emerald-500 transition-colors">
+                              Open PDF
+                            </span>
+                            <svg className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                            </svg>
+                          </div>
+                        </a>
                       </div>
-                      <div className="p-6">
-                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">MUSIC</span>
+                      <div style={{ padding: "10px 15px" }}>
+                        <span className="text-[8px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 font-mono">
+                          MUSIC • <span className="text-emerald-500">{isMusicPlaying ? "CLICK TO STOP" : "CLICK TO START"}</span>
+                        </span>
                         <div
                           onClick={() => isMusicPlaying ? handleMusicPause() : handleMusicPlay()}
                           className="flex items-center gap-2 cursor-pointer group active:scale-95 transition-transform duration-200 mt-1"
@@ -204,7 +221,7 @@ export default function HerowithScale() {
                           <div className="w-5 h-5 rounded-full overflow-hidden border border-[var(--pattern)] shrink-0 bg-black">
                             <img src={MusicWidget} alt="Khat song album art mobile" className={cn("w-full h-full object-cover", isMusicPlaying && "animate-[spin_8s_linear_infinite]")} />
                           </div>
-                          <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold truncate group-hover:text-emerald-500 transition-colors">
+                          <span className="text-neutral-900 dark:text-neutral-100 text-sm font-semibold truncate group-hover:text-emerald-500 transition-colors select-none">
                             Khat
                           </span>
                           <div className="flex items-end gap-[1px] h-2 w-2 ml-auto">
@@ -383,6 +400,7 @@ const FolderSlider = ({ className }: { className?: string }) => {
       {/* Document Sheet (slides up on hover) */}
       <div 
         className="absolute left-[12px] right-[12px] bottom-1 h-[65%] bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-50 dark:to-neutral-100 text-black p-2 shadow-[0_4px_12px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.6)] border border-neutral-200/80 rounded-[2px] z-10 transition-all duration-400 ease-out transform translate-y-[60%] opacity-0 group-hover/folder:translate-y-[-35%] group-hover/folder:rotate-[-1.5deg] group-hover/folder:opacity-100"
+        style={{ willChange: "transform, opacity" }}
       >
         {/* Document lines simulation */}
         <div className="flex flex-col gap-1 w-full h-full relative">
@@ -442,7 +460,10 @@ const FolderSlider = ({ className }: { className?: string }) => {
         </span>
 
         {/* Catalog Drawer Pull Handle (vintage metallic bar) */}
-        <div className="absolute top-[35%] left-1/2 -translate-x-1/2 w-7 h-[2px] rounded-full bg-gradient-to-b from-neutral-300 to-neutral-400 dark:from-neutral-700 dark:to-neutral-800 border border-neutral-400/20 dark:border-neutral-600/20 shadow-[0_0.5px_1px_rgba(0,0,0,0.15)] opacity-80 group-hover/folder:scale-x-110 transition-all duration-300 z-30" />
+        <div 
+          className="absolute top-[35%] left-1/2 -translate-x-1/2 w-7 h-[2px] rounded-full bg-gradient-to-b from-neutral-300 to-neutral-400 dark:from-neutral-700 dark:to-neutral-800 border border-neutral-400/20 dark:border-neutral-600/20 shadow-[0_0.5px_1px_rgba(0,0,0,0.15)] opacity-80 group-hover/folder:scale-x-110 transition-all duration-300 z-30" 
+          style={{ willChange: "transform" }}
+        />
 
         {/* Vintage red ink stamp */}
         <div className="text-[7px] font-mono text-[#b03535] dark:text-[#db4d4d] border border-dashed border-[#b03535]/40 dark:border-[#db4d4d]/40 px-1 rounded-sm uppercase tracking-widest font-black transform rotate-[-4deg] opacity-75 select-none scale-90">
@@ -451,7 +472,10 @@ const FolderSlider = ({ className }: { className?: string }) => {
       </div>
 
       {/* The Tab */}
-      <div className="absolute bottom-[40%] left-[12px] h-[12px] px-2 bg-[#eaeae2] dark:bg-[#141414] border-t border-x border-[var(--pattern)] rounded-t-[3px] flex items-center justify-center z-20 transition-all duration-400 ease-out origin-bottom shadow-sm group-hover/folder:translate-y-[-3px] group-hover/folder:scale-y-[1.05]">
+      <div 
+        className="absolute bottom-[40%] left-[12px] h-[12px] px-2 bg-[#eaeae2] dark:bg-[#141414] border-t border-x border-[var(--pattern)] rounded-t-[3px] flex items-center justify-center z-20 transition-all duration-400 ease-out origin-bottom shadow-sm group-hover/folder:translate-y-[-3px] group-hover/folder:scale-y-[1.05]"
+        style={{ willChange: "transform" }}
+      >
         <span className="text-[6.5px] font-mono font-bold tracking-wider text-neutral-500 dark:text-neutral-400 uppercase">
           RESUME.PDF
         </span>

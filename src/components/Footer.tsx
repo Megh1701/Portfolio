@@ -6,6 +6,16 @@ export default function Footer() {
   const [likes, setLikes] = useState(0)
   const [hasLiked, setHasLiked] = useState(false)
   const [plusOnes, setPlusOnes] = useState<{ id: number; x: number; y: number }[]>([])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     // 1. Handle Visitor Counter
@@ -75,14 +85,14 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative w-full bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 border-t border-[var(--pattern)] [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)] py-12 md:py-24 overflow-hidden flex flex-col justify-center items-center">
+    <footer className="relative mb-[18px] w-full bg-[#f5f5f0] dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 border-t border-[var(--pattern)] [--pattern:var(--color-neutral-300)] dark:[--pattern:rgba(255,255,255,0.08)] py-12 md:py-24 overflow-hidden flex flex-col justify-center items-center">
       {/* Centered full-height vertical borders wrapper */}
       <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl pointer-events-none z-10">
         <div className="absolute top-0 left-0 h-full border-l border-[var(--pattern)]" />
         <div className="absolute top-0 right-0 h-full border-l border-[var(--pattern)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full px-8 md:px-20 relative z-10">
+      <div className="max-w-7xl mx-auto w-full px-8 md:px-20 relative z-10" style={{ paddingLeft: isMobile ? "18px" : "0px", paddingRight: isMobile ? "18px" : "0px" }}>
         {/* Footer 3-Grid Layout */}
         <div className="w-full flex md:grid md:grid-cols-3 border-t border-b md:border  border-[var(--pattern)] divide-x divide-[var(--pattern)] bg-transparent font-mono select-none overflow-x-auto snap-x snap-mandatory no-scrollbar">
 
@@ -164,31 +174,41 @@ export default function Footer() {
         </div>
 
         {/* Bottom Socials & Nav Row */}
-        <div className="w-full mt-8 border-t border-[var(--pattern)] pt-8 flex flex-row flex-wrap justify-between items-center gap-y-4 gap-x-6 font-mono">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-neutral-450 dark:text-neutral-500 uppercase tracking-widest select-none justify-start">
+        <div className="w-full border-t border-[var(--pattern)] pt-8 flex flex-row flex-wrap justify-between items-center gap-y-4 gap-x-6 font-mono" style={{marginTop: "18px"}}>
+          <div className="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 text-xs text-neutral-450 dark:text-neutral-500 uppercase tracking-widest select-none justify-start items-center">
             <span>[ CONNECT ]</span>
-            <a
-              href="https://github.com/Megh1701"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
-            >
-              GitHub ↗
-            </a>
-            <a
-              href="https://www.linkedin.com/in/patel-megh-172a7528a/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
-            >
-              LinkedIn ↗
-            </a>
-            <a
-              href="mailto:pmegh456@gmail.com"
-              className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
-            >
-              Email ↗
-            </a>
+            <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1">
+              <a
+                href="https://x.com/pmegh456"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
+              >
+                X↗
+              </a>
+              <a
+                href="https://github.com/Megh1701"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
+              >
+                GitHub↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/patel-megh-172a7528a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
+              >
+                LinkedIn↗
+              </a>
+              <a
+                href="mailto:pmegh456@gmail.com"
+                className="text-neutral-900 dark:text-white hover:text-[#059669] dark:hover:text-[#10b981] transition-colors"
+              >
+                Email↗
+              </a>
+            </div>
           </div>
 
           <div className="text-[10px] text-neutral-450 dark:text-neutral-500 uppercase tracking-widest text-left select-none">

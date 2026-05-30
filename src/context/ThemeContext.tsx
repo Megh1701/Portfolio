@@ -180,9 +180,12 @@ export function ThemeProvider({
       document.documentElement.style.setProperty('--y', '32px')
     }
 
-    // Modern smooth transition
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
+    // Modern smooth transition - disabled on mobile to prevent GPU performance lag
     if (
-      'startViewTransition' in document
+      'startViewTransition' in document &&
+      !isMobile
     ) {
       // @ts-ignore
       document.startViewTransition(() => {

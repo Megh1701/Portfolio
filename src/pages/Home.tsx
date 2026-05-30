@@ -147,7 +147,7 @@ function Home() {
                                 onMouseEnter={handleMusicPlay}
                                 onMouseLeave={handleMusicPause}
                                 onClick={() => window.open('https://open.spotify.com/search/Khat%20Navjot%20Ahuja', '_blank')}
-                                className="flex items-center gap-4 group cursor-pointer active:scale-95 transition-transform duration-200"
+                                className="flex items-center gap-4 group cursor-pointer active:scale-95 transition-transform duration-200 select-none"
                             >
                                 {/* Rotating Album Art Disc (Spins continuously at all times!) */}
                                 <img
@@ -157,25 +157,7 @@ function Home() {
                                 />
 
                                 {/* Music Details */}
-                                <div className="flex flex-col min-w-0">
-                                    <div className="flex items-center gap-2 mb-0.5">
-                                        <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">
-                                            Currently Listening
-                                        </span>
-                                        {/* Equalizer animation: bounces only when audio is active */}
-                                        <div className="flex items-end gap-[2px] h-3.5 w-3.5 pb-[2px]">
-                                            <span className={`w-[2.5px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-1' : 'h-1'}`} />
-                                            <span className={`w-[2.5px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-2' : 'h-2'}`} />
-                                            <span className={`w-[2.5px] bg-emerald-500 rounded-full ${isMusicPlaying ? 'animate-music-3' : 'h-1.5'}`} />
-                                        </div>
-                                    </div>
-                                    <h4 className="text-sm font-bold text-neutral-800 truncate group-hover:text-emerald-600 transition-colors">
-                                        Khat
-                                    </h4>
-                                    <p className="text-xs text-neutral-500 truncate">
-                                        Navjot Ahuja
-                                    </p>
-                                </div>
+                               
                             </div>
                         </div>
 

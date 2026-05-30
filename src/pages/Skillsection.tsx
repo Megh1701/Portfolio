@@ -205,6 +205,7 @@ export default function Skillsection() {
 
   // Track viewport width responsiveness
   const [isDesktop, setIsDesktop] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : false)
+  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < 768 : false)
 
 
 
@@ -217,6 +218,7 @@ export default function Skillsection() {
   useEffect(() => {
     const checkWidth = () => {
       setIsDesktop(window.innerWidth >= 1024)
+      setIsMobile(window.innerWidth < 768)
     }
     checkWidth()
     window.addEventListener("resize", checkWidth)
@@ -568,13 +570,13 @@ export default function Skillsection() {
       </div>
 
       {/* Header Container */}
-      <div className="max-w-7xl  mx-auto w-full px-8 md:px-20 mb-16 flex flex-col items-center shrink-0">
-        <div className="mb-16  text-center relative z-10 shrink-0" style={{ paddingBottom: "100px" }}>
+      <div className="max-w-7xl mx-auto w-full px-8 md:px-20 mb-16 flex flex-col items-start md:items-center shrink-0">
+        <div className="mb-16 text-left md:text-center relative z-10 shrink-0" style={{ paddingBottom: "100px", paddingLeft: !isDesktop ? "18px" : "0px", paddingRight: !isDesktop ? "18px" : "0px" }}>
 
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase">
             SKILLS
           </h2>
-          <p className="text-neutral-500 dark:text-neutral-400 text-xs max-w-md mx-auto mt-2 leading-relaxed">
+          <p className="text-neutral-500 dark:text-neutral-400 text-xs max-w-md mt-2 leading-relaxed md:mx-auto">
             Technologies and tools I have worked with.
           </p>
         </div>
@@ -684,6 +686,7 @@ export default function Skillsection() {
                           isBeingDragged ? cn("scale-110 -translate-y-1.5 z-20 bg-white dark:bg-neutral-950 shadow-lg", theme.text) : "shadow-[0_2px_5px_rgba(0,0,0,0.02)]"
                         )
                     )}
+                    style={{ willChange: "transform" }}
                   >
                     {iconUrl ? (
                       <img
@@ -705,8 +708,8 @@ export default function Skillsection() {
         </div>
       ) : (
         <div
-          className="w-full max-w-7xl mx-auto md:px-20 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10"
-          style={{ paddingLeft: '10px' }}
+          className="w-full max-w-7xl mx-auto px-8 md:px-20 relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10"
+          style={{ paddingLeft: !isDesktop ? '18px' : '0px', paddingRight: !isDesktop ? '18px' : '0px' }}
         >
           {skillsData.map((cat) => {
             const theme = CATEGORY_THEMES[cat.category] || {
@@ -732,6 +735,7 @@ export default function Skillsection() {
                       <div
                         key={skill}
                         className="flex items-center gap-1.5 px-2.5 py-1 border border-neutral-300 dark:border-neutral-800 rounded-full bg-white dark:bg-neutral-900 text-[10px] font-semibold text-neutral-800 dark:text-white shadow-sm"
+                        style={isMobile ? { padding: "1px 3px" } : undefined}
                       >
                         {iconUrl ? (
                           <img

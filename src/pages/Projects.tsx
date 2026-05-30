@@ -321,9 +321,9 @@ export default function Projects() {
         <div className="absolute top-0 right-0 h-full border-l border-neutral-300 dark:border-neutral-800/60" />
       </div>
 
-      <div className="max-w-5xl mx-auto w-full px-6 md:px-12 relative z-10 flex flex-col items-center flex-1 justify-center">
+      <div className="max-w-5xl mx-auto w-full px-8 md:px-12 relative z-10 flex flex-col items-start md:items-center flex-1 justify-center">
         {/* Bold uppercase Heading PROJECTS */}
-        <div className="w-full text-center mb-10 shrink-0">
+        <div className="w-full text-left md:text-center mb-10 shrink-0" style={{ paddingLeft: isMobile ? '18px' : '0px', paddingRight: isMobile ? '18px' : '0px' }}>
           <h2 className="text-4xl md:text-5xl font-black text-black dark:text-white uppercase tracking-normal font-sans select-none">
             PROJECTS
           </h2>
@@ -332,6 +332,7 @@ export default function Projects() {
         {/* Spread / Fan stack layout container — clicking the bg deselects */}
         <div
           className="relative w-full flex-1 min-h-[480px] flex justify-center items-center"
+          style={{ paddingLeft: isMobile ? '18px' : '0px', paddingRight: isMobile ? '18px' : '0px' }}
           onClick={() => {
             if (typeof window !== "undefined" && window.innerWidth >= 768) {
               setSelectedIndex(null)

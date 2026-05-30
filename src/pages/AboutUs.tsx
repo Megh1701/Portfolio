@@ -1,12 +1,23 @@
+import { useState, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
 
 export default function AboutUs() {
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
 
     const milestoneStyle = {
         paddingTop: "20px",
         paddingBottom: "20px",
-        paddingLeft: "8px",
-        paddingRight: "8px",
+        paddingLeft: "0px",
+        paddingRight: "0px",
     }
 
     return (
@@ -24,7 +35,7 @@ export default function AboutUs() {
 
                 {/* Section Header with explicit margin style for spacing with bottom content */}
                 <div style={{ marginBottom: "50px" }} className="text-left w-full max-w-6xl mx-auto">
-                    <h2 style={{ paddingLeft: "20px" }} className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase font-mono">
+                    <h2 style={{ paddingLeft: isMobile ? "18px" : "20px", paddingRight: isMobile ? "18px" : "0px" }} className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase font-mono">
                         EDUCATION & MILESTONES
                     </h2>
                 </div>
@@ -33,7 +44,7 @@ export default function AboutUs() {
                 <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
                     {/* COLUMN 1: EDUCATION (WITH 2x2 BOX) & SOCIALS */}
-                    <div className="flex flex-col gap-6 w-full" style={{ paddingLeft: "20px" }}>
+                    <div className="flex flex-col gap-6 w-full" style={{ paddingLeft: isMobile ? "18px" : "20px", paddingRight: isMobile ? "18px" : "0px" }}>
                         <div className="flex flex-col gap-3 w-full">
                             <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase font-mono tracking-widest pl-1">
                                 [01 // EDUCATION]
@@ -96,7 +107,7 @@ export default function AboutUs() {
                         </div>
 
                         {/* Social Connections underneath the box */}
-                        <div className="w-full flex flex-wrap justify-start items-center gap-x-5 gap-y-2.5 mt-2 text-xs font-mono select-none pl-1">
+                        <div className="w-full flex flex-wrap justify-start items-center gap-x-3 sm:gap-x-5 gap-y-1.5 mt-2 text-xs font-mono select-none pl-1">
                             {/* X */}
                             <a
                                 href="https://x.com/pmegh456"
@@ -148,7 +159,7 @@ export default function AboutUs() {
                     </div>
 
                     {/* COLUMN 2: EXPERIENCE (PLAIN LIST, NO BOX) - ORDER: NEW -> OLD */}
-                    <div className="flex flex-col gap-3 w-full">
+                    <div className="flex flex-col gap-3 w-full" style={{ paddingLeft: isMobile ? "18px" : "0px", paddingRight: isMobile ? "18px" : "0px" }}>
                         <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase font-mono tracking-widest pl-1">
                             [02 // MILESTONES]
                         </span>

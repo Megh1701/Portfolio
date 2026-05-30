@@ -74,25 +74,27 @@ export default function Contact() {
       </div>
 
       {/* Container with vertical lines on both sides matching the Hero section */}
-      <div className="w-full max-w-7xl relative flex flex-col items-center px-6 md:px-16 my-6 md:my-10 gap-10 md:gap-16"
+      <div className="w-full max-w-7xl relative flex flex-col items-start md:items-center px-8 md:px-16 my-6 md:my-10 gap-10 md:gap-16"
         style={{
           marginTop: isDesktop ? "100px" : "0px",
+          paddingLeft: !isDesktop ? "18px" : "0px",
+          paddingRight: !isDesktop ? "18px" : "0px",
         }}>
 
 
         {/* Section Header */}
-        <div className="text-center relative z-10 shrink-0">
+        <div className="text-left md:text-center relative z-10 shrink-0">
 
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-3 text-neutral-900 dark:text-neutral-50 uppercase">
             CONTACT
           </h2>
-          <p className="text-neutral-500 dark:text-neutral-400 text-xs max-w-md mx-auto mt-2 leading-relaxed">
+          <p className="text-neutral-500 dark:text-neutral-400 text-xs max-w-md mt-2 leading-relaxed md:mx-auto">
             Leave a message on the slate below.
           </p>
         </div>
 
         {/* Board and Keyboard Wrapper (tight gap) */}
-        <div className="w-full flex flex-col items-center z-20">
+        <div className="w-full flex flex-col items-start md:items-center z-20">
 
           {/* Classroom Blackboard Form */}
           <form
@@ -252,7 +254,8 @@ export default function Contact() {
           opacity: showSuccess ? 1 : 0,
           pointerEvents: showSuccess ? "auto" : "none",
           transition: "all 450ms cubic-bezier(0.16, 1, 0.3, 1)",
-          fontFamily: '"Patrick Hand", cursive'
+          fontFamily: '"Patrick Hand", cursive',
+          willChange: "transform, opacity"
         }}
       >
         <svg className="w-5 h-5 text-[#10b981] shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
